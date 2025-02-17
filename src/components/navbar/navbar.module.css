@@ -6,8 +6,9 @@
     justify-content: space-between;
     background-color: white;
     border-bottom: 1px solid #E8EBEF;
-    padding: 0 30px;
+    padding: 0 20px;
     position: fixed;
+    z-index: 200;
 }
 .left-content h3{
     font-size: 22px;

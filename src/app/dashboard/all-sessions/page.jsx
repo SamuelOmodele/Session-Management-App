@@ -1,17 +1,22 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import styles from './page.module.css'
 import Navbar from '@/components/navbar/navbar'
-import StatCard from '@/components/statistic-card/statCard'
 import SessionCard from '@/components/session-card/sessionCard'
+import { CgSearch } from "react-icons/cg";
 
 const AllSessions = () => {
+
   return (
     <div>
       <Navbar headText={'All sessions'} descriptionText={"Manage all your created sessions here."} />
       <div className={styles['content']}>
 
         <div className={styles['filter-box']}>
-          <h3>Recent Sessions</h3>
+          <form className={styles['form']} action="">
+            <CgSearch className={styles['search-icon']}/>
+            <input type="search" name="" id="" placeholder='Search . . .'/>
+          </form>
           <div className={styles['right']}>
             <div className={styles['select-box']}>
               Status:
@@ -21,7 +26,7 @@ const AllSessions = () => {
               </select>
             </div>
             <div className={styles['select-box']}>
-              <select name="" id="" style={{width: '100%'}}>
+              <select name="" id="" style={{ width: '100%' }}>
                 <option value="">Filter</option>
               </select>
             </div>
@@ -31,12 +36,12 @@ const AllSessions = () => {
 
         <div className={styles['session-card-container']}>
           <SessionCard status={'ONGOING'} />
-          <SessionCard status={'ONGOING'}/>
-          <SessionCard status={'COMPLETED'}/>
-          <SessionCard status={'COMPLETED'}/>
-          <SessionCard status={'CANCELLED'}/>
-          <SessionCard status={'COMPLETED'}/>
-          <SessionCard status={'COMPLETED'}/>
+          <SessionCard status={'ONGOING'} />
+          <SessionCard status={'COMPLETED'} />
+          <SessionCard status={'COMPLETED'} />
+          <SessionCard status={'CANCELLED'} />
+          <SessionCard status={'COMPLETED'} />
+          <SessionCard status={'COMPLETED'} />
         </div>
 
       </div>

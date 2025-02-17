@@ -23,12 +23,12 @@
 }
 .session-card h3{
     font-weight: 500;
-    font-size: 17px;
+    font-size: 16.5px;
     margin-bottom: 10px;
 }
 .session-card p{
     font-weight: 400;
-    font-size: 13.5px;
+    font-size: 13px;
 }
 .bottom-section{
     display: flex;
@@ -45,8 +45,8 @@
     display: flex;
 }
 .members-container > div{
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     font-size: 13px;
     font-weight: 500;
@@ -61,15 +61,15 @@
 }
 .members-container > div:nth-child(2){
     background-color: #DDAC00;
-    margin-left: -14px;
+    margin-left: -10px;
 }
 .members-container > div:nth-child(3){
     background-color: #2D85AB;
-    margin-left: -14px;
+    margin-left: -10px;
 }
 .members-container > div:nth-child(4){
     background-color: #D06A30;
-    margin-left: -14px;
+    margin-left: -10px;
 }
 #ongoing{
     background-color: #FFF4D5;

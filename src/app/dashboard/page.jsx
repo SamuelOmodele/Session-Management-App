@@ -1,10 +1,13 @@
-import React from 'react'
+'use client'
+import React, { useEffect } from 'react'
 import styles from './page.module.css'
 import Navbar from '@/components/navbar/navbar'
 import StatCard from '@/components/statistic-card/statCard'
 import SessionCard from '@/components/session-card/sessionCard'
 
 const Dashboard = () => {
+
+
   return (
     <div>
       <Navbar headText={'Dashboard'} descriptionText={"Welcome, let’s manage your sessions."} />

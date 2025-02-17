@@ -1,5 +1,7 @@
 .layout{
     display: flex;
+    background-color: #F6F8FA;
+    height: 100%;
 }
 .sidebar-container{
     width: 260px;
@@ -8,8 +10,7 @@
 }
 .children-container{
     width: calc(100% - 260px);
-    background-color: #F6F8FA;
-    height: 100hv;
+    height: 100%;
     overflow-y: auto;
     margin-left: 260px;
 }

@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './sidebar.module.css'
 import { LuLayoutDashboard } from "react-icons/lu";
 import { SlScreenDesktop } from "react-icons/sl";
@@ -7,11 +7,23 @@ import { HiOutlineUserGroup } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
 import { LuSettings } from "react-icons/lu";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const Sidebar = () => {
-
   const router = useRouter();
+  const [activeSidebarMenu, setActiveSidebarMenu] = useState();
+  
+  let pathname = usePathname(); // Get the current route
+
+  useEffect(() => {
+    console.log(pathname)
+    setActiveSidebarMenu(pathname)
+  });
+
+  const handleClick = (route) => {
+    setActiveSidebarMenu(route);
+    router.push(route);
+  }
 
   return (
     <div className={styles['sidebar']}>
@@ -21,8 +33,9 @@ const Sidebar = () => {
 
 
       <div className={styles['sidebar-menu']}>
-        <div className={styles['menu-item']} id={styles['active']} onClick={() => router.push("/dashboard")}><LuLayoutDashboard className={styles['icon']} /> Dashboard</div>
-        <div className={styles['menu-item']} onClick={() => router.push("/dashboard/all-sessions")}><SlScreenDesktop className={styles['icon']} /> All Sessions</div>
+        {/* {activeSidebarMenu} */}
+        <div className={styles['menu-item']} id={ activeSidebarMenu === '/dashboard' ? styles['active'] : styles['']} onClick={() => handleClick("/dashboard")}><LuLayoutDashboard className={styles['icon']} /> Dashboard</div>
+        <div className={styles['menu-item']} id={ activeSidebarMenu === '/dashboard/all-sessions' ? styles['active'] : styles['']} onClick={() => handleClick("/dashboard/all-sessions")}><SlScreenDesktop className={styles['icon']} /> All Sessions</div>
         <div className={styles['menu-item']}><HiOutlineUserGroup className={styles['icon']} /> All Students</div>
         <div className={styles['menu-item']}><CgProfile className={styles['icon']} /> Profile</div>
         <div className={styles['menu-item']}><LuSettings className={styles['icon']} /> Settings</div>
