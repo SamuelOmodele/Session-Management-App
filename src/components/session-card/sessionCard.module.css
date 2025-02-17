@@ -23,12 +23,12 @@
 }
 .session-card h3{
     font-weight: 500;
-    font-size: 19px;
+    font-size: 17px;
     margin-bottom: 10px;
 }
 .session-card p{
     font-weight: 400;
-    font-size: 14px;
+    font-size: 13.5px;
 }
 .bottom-section{
     display: flex;
