@@ -1,0 +1,95 @@
+.session-card{
+    width: 100%;
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #E8EBEF;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.status{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    border-radius: 4px;
+    padding: 4px 7px;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: #FFF4D5;
+    color: #DCA70D;
+}
+.session-card h3{
+    font-weight: 500;
+    font-size: 19px;
+    margin-bottom: 10px;
+}
+.session-card p{
+    font-weight: 400;
+    font-size: 14px;
+}
+.bottom-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1.5px solid #F6F8FA;
+    width: 100%;
+
+    margin-top: 15px;
+    padding-top: 10px;
+}
+.members-container{
+    
+    display: flex;
+}
+.members-container > div{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #0D7E3A;
+}
+.members-container > div:first-child{
+    background-color: #8A25A4;
+}
+.members-container > div:nth-child(2){
+    background-color: #DDAC00;
+    margin-left: -14px;
+}
+.members-container > div:nth-child(3){
+    background-color: #2D85AB;
+    margin-left: -14px;
+}
+.members-container > div:nth-child(4){
+    background-color: #D06A30;
+    margin-left: -14px;
+}
+#ongoing{
+    background-color: #FFF4D5;
+    color: #DCA70D;
+}
+#completed{
+    background-color: #C7FFD4;
+    color: #28A745;
+}
+#cancelled{
+    background-color: #FFE6DF;
+    color: #F55D30;
+}
+.user-list{
+    border: 1px solid #E9E9E9;
+    border-radius: 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    font-size: 14px;
+}

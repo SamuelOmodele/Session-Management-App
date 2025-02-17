@@ -1,0 +1,15 @@
+.layout{
+    display: flex;
+}
+.sidebar-container{
+    width: 260px;
+    height: 100hv;
+    position: fixed;
+}
+.children-container{
+    width: calc(100% - 260px);
+    background-color: #F6F8FA;
+    height: 100hv;
+    overflow-y: auto;
+    margin-left: 260px;
+}
