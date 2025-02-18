@@ -14,10 +14,10 @@ const Dashboard = () => {
       <div className={styles['content']}>
 
         <div className={styles['card-container']}>
-          <StatCard text={'Total Sessions'} value={'108'} percent={'3.4'} />
-          <StatCard text={'Total Sessions'} value={'108'} percent={'3.4'} />
-          <StatCard text={'Total Sessions'} value={'108'} percent={'3.4'} />
-          <StatCard text={'Total Sessions'} value={'108'} percent={'3.4'} />
+          <StatCard text={'Total sessions'} value={'108'} percent={'3.4'} />
+          <StatCard text={'Active sessions'} value={'6'} percent={'3.4'} />
+          <StatCard text={'Total students'} value={'589'} percent={'3.4'} />
+          <StatCard text={'Submitted tasks'} value={'5,028'} percent={'3.4'} />
         </div>
 
         <div className={styles['filter-box']}>
