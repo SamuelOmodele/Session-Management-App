@@ -301,3 +301,13 @@
     font-size: 13px;
     font-weight: 500;
 }
+.logo{
+    background-color: #204E4C;
+    color: white;
+    font-size: 15px;
+    border-radius: 13px;
+    width: 100%;
+    text-align: center;
+    height: 48px;
+    line-height: 47px;
+}

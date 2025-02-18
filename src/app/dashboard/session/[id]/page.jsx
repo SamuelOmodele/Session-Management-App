@@ -138,6 +138,9 @@ const Page = () => {
                     <h3>Supported languages</h3>
                     <p>Python, C#, C++, Matlab</p>
                 </div>
+                <div className={styles['box']}>
+                    <div className={styles['logo']}>Edit session details</div>
+                </div>
             </div>
         </div>
     )
