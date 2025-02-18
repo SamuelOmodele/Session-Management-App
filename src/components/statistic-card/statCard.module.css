@@ -1,0 +1,34 @@
+.card{
+    width: 100%;
+    background-color: white;
+    height: 120px;
+    border: 1px solid #E8EBEF;
+    border-radius: 2px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.text{
+    font-size: 15px;
+    font-weight: 400;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+}
+.value{
+    font-weight: 500;
+    font-size: 25px;
+    margin-top: 5px;
+}
+.percent-text{
+    font-size: 13px;
+    font-weight: 400;
+}
+.percent-text span{
+    color: #28A745;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
