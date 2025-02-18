@@ -4,9 +4,15 @@ import styles from './page.module.css'
 import Navbar from '@/components/navbar/navbar'
 import StatCard from '@/components/statistic-card/statCard'
 import SessionCard from '@/components/session-card/sessionCard'
+import { useDispatch } from 'react-redux'
+import { setActiveMenu } from '@/redux/sidebarSlice'
 
 const Dashboard = () => {
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setActiveMenu('dashboard'))
+  }, []);
 
   return (
     <div>

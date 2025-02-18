@@ -4,8 +4,16 @@ import styles from './page.module.css'
 import Navbar from '@/components/navbar/navbar'
 import SessionCard from '@/components/session-card/sessionCard'
 import { CgSearch } from "react-icons/cg";
+import { useDispatch } from 'react-redux'
+import { setActiveMenu } from '@/redux/sidebarSlice'
 
 const AllSessions = () => {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setActiveMenu('all-sessions'))
+  }, []);
+
 
   return (
     <div>
@@ -14,8 +22,8 @@ const AllSessions = () => {
 
         <div className={styles['filter-box']}>
           <form className={styles['form']} action="">
-            <CgSearch className={styles['search-icon']}/>
-            <input type="search" name="" id="" placeholder='Search . . .'/>
+            <CgSearch className={styles['search-icon']} />
+            <input type="search" name="" id="" placeholder='Search . . .' />
           </form>
           <div className={styles['right']}>
             <div className={styles['select-box']}>

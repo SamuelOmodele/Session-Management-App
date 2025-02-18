@@ -126,6 +126,12 @@
     width: 20%;
 }
 
+.head-score, .head-time, .head-date-time, .row-score, .row-time, .row-date-time{
+    width: 25%;
+}
+.head-score, .row-score{
+    padding-left: 30px;
+}
 .head-email {
     width: 50%;
 }
@@ -208,7 +214,6 @@
     width: 23px;
     height: 23px;
     border-radius: 50%;
-    margin-left: auto;
 }
 
 .link {

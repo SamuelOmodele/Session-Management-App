@@ -8,20 +8,13 @@ import { CgProfile } from "react-icons/cg";
 import { LuSettings } from "react-icons/lu";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useRouter, usePathname } from 'next/navigation';
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
   const router = useRouter();
-  const [activeSidebarMenu, setActiveSidebarMenu] = useState();
-  
-  let pathname = usePathname(); // Get the current route
-
-  useEffect(() => {
-    console.log(pathname)
-    setActiveSidebarMenu(pathname)
-  });
+  const activeSidebarMenu = useSelector((state) => state.sidebar.activeMenu);
 
   const handleClick = (route) => {
-    setActiveSidebarMenu(route);
     router.push(route);
   }
 
@@ -33,9 +26,8 @@ const Sidebar = () => {
 
 
       <div className={styles['sidebar-menu']}>
-        {/* {activeSidebarMenu} */}
-        <div className={styles['menu-item']} id={ activeSidebarMenu === '/dashboard' ? styles['active'] : styles['']} onClick={() => handleClick("/dashboard")}><LuLayoutDashboard className={styles['icon']} /> Dashboard</div>
-        <div className={styles['menu-item']} id={ activeSidebarMenu === '/dashboard/all-sessions' ? styles['active'] : styles['']} onClick={() => handleClick("/dashboard/all-sessions")}><SlScreenDesktop className={styles['icon']} /> All Sessions</div>
+        <div className={styles['menu-item']} id={ activeSidebarMenu === 'dashboard' ? styles['active'] : styles['']} onClick={() => handleClick("/dashboard")}><LuLayoutDashboard className={styles['icon']} /> Dashboard</div>
+        <div className={styles['menu-item']} id={ activeSidebarMenu === 'all-sessions' ? styles['active'] : styles['']} onClick={() => handleClick("/dashboard/all-sessions")}><SlScreenDesktop className={styles['icon']} /> All Sessions</div>
         <div className={styles['menu-item']}><HiOutlineUserGroup className={styles['icon']} /> All Students</div>
         <div className={styles['menu-item']}><CgProfile className={styles['icon']} /> Profile</div>
         <div className={styles['menu-item']}><LuSettings className={styles['icon']} /> Settings</div>
