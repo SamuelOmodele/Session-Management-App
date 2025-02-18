@@ -97,8 +97,8 @@ const Page = () => {
                 <div className={styles['box']}>
                     <div className={styles['open-access']}>
                         <h3>Open access</h3>
-                        <div className={styles['toggle-container']}>
-                            <div className={styles['toggle-circle']}></div>
+                        <div className={styles['toggle-container']} style={{backgroundColor: '#969696'}}>
+                            <div className={styles['toggle-circle']} style={{marginLeft: '0'}}></div>
                         </div>
                     </div>
                     <div className={styles['setting']}>
