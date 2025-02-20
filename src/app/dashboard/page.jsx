@@ -20,10 +20,10 @@ const Dashboard = () => {
       <div className={styles['content']}>
 
         <div className={styles['card-container']}>
-          <StatCard text={'Total sessions'} value={'108'} percent={'3.4'} />
-          <StatCard text={'Active sessions'} value={'6'} percent={'3.4'} />
-          <StatCard text={'Total students'} value={'589'} percent={'3.4'} />
-          <StatCard text={'Submitted tasks'} value={'5,028'} percent={'3.4'} />
+          <StatCard text={'Total sessions'} value={'4'} percent={'3.4'} />
+          <StatCard text={'Active sessions'} value={'2'} percent={'3.4'} />
+          <StatCard text={'Total students'} value={'10'} percent={'3.4'} />
+          <StatCard text={'Submitted tasks'} value={'34'} percent={'3.4'} />
         </div>
 
         <div className={styles['filter-box']}>
@@ -46,13 +46,13 @@ const Dashboard = () => {
         </div>
 
         <div className={styles['session-card-container']}>
-          <SessionCard status={'ONGOING'} />
-          <SessionCard status={'ONGOING'}/>
-          <SessionCard status={'COMPLETED'}/>
-          <SessionCard status={'COMPLETED'}/>
-          <SessionCard status={'CANCELLED'}/>
-          <SessionCard status={'COMPLETED'}/>
-          <SessionCard status={'COMPLETED'}/>
+          <SessionCard status={'ONGOING'} title={'Data Structures Lab Assignment - CSC301'} description={'Implement linked lists and perform basic operations such as insertion, deletion, and traversal.'}/>
+          <SessionCard status={'ONGOING'} title={'Mobile App Development Workshop - CSC412'} description={' Develop a To-Do List web application using React for the frontend, PHP for the backend, and MySQL for the database. The application should allow users to add, complete, and delete tasks.'}/>
+          <SessionCard status={'COMPLETED'} title={'Python Programming Assignment - CSC 101'} description={'Write a python program to calculate the first 50 terms in a fibonacci series. '}/>
+          <SessionCard status={'CANCELLED'} title={'Web Programming Assignment - CSC 293'} description={'Develop a personal e commerce website. In the website, you must implement register and login operations using mysql '}/>
+          {/* <SessionCard status={'CANCELLED'} title={} description={}/> */}
+          {/* <SessionCard status={'COMPLETED'}/>
+          <SessionCard status={'COMPLETED'}/> */}
         </div>
 
       </div>

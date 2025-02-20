@@ -5,7 +5,7 @@ import { GoDotFill } from "react-icons/go";
 import { PiUserListBold } from "react-icons/pi";
 import { useRouter } from 'next/navigation';
 
-const SessionCard = ({ status, }) => {
+const SessionCard = ({ status, title, description }) => {
 
 const router = useRouter();
 
@@ -18,18 +18,18 @@ const router = useRouter();
                 </div>
                 <PiDotsThreeVerticalBold />
             </div>
-            <h3 onClick={() => router.push('/dashboard/session/1')}>Data Structures Lab Assignment - CSC301</h3>
-            <p>Implement linked lists and perform basic operations such as insertion, deletion, and traversal.</p>
+            <h3 onClick={() => router.push('/dashboard/session/1')}>{title}</h3>
+            <p>{description}</p>
             <div className={styles['bottom-section']}>
                 <div className={styles['members-container']}>
                     <div>D</div>
                     <div>Q</div>
                     <div>A</div>
-                    <div>+79</div>
+                    <div>+4</div>
                 </div>
 
                 <div className={styles['user-list']}>
-                    <PiUserListBold size={18}/> 54/128
+                    <PiUserListBold size={18}/> 4/7
                 </div>
             </div>
         </div>

@@ -17,21 +17,19 @@ import { setActiveMenu } from '@/redux/sidebarSlice';
 const Page = () => {
 
     const invitations = [
-        { name: 'Peculiar Badejo', email: 'peculiarbadejoemailaddress@gmail.com', date: 'Feb 6, 11:43 AM' },
-        { name: 'Peculiar Badejo', email: 'peculiarbadejoemailaddress@gmail.com', date: 'Feb 6, 11:43 AM' },
-        { name: 'Peculiar Badejo', email: 'peculiarbadejoemailaddress@gmail.com', date: 'Feb 6, 11:43 AM' },
-        { name: 'Peculiar Badejo', email: 'peculiarbadejoemailaddress@gmail.com', date: 'Feb 6, 11:43 AM' },
-        { name: 'Peculiar Badejo', email: 'peculiarbadejoemailaddress@gmail.com', date: 'Feb 6, 11:43 AM' },
-        { name: 'Peculiar Badejo', email: 'peculiarbadejoemailaddress@gmail.com', date: 'Feb 6, 11:43 AM' },
+        { icon: 'PB', name: 'Peculiar Badejo', email: 'peculiarbadejoemailaddress@gmail.com', date: 'Feb 6, 11:43 AM' },
+        { icon: 'OO', name: 'Olamide Oni', email: 'olamideoni22@gmail.com', date: 'Feb 6, 11:43 AM' },
+        { icon: 'TO', name: 'Tolu Olalekan', email: 'toluola1@gmail.com', date: 'Feb 6, 11:43 AM' },
     ]
 
     const submissions = [
-        { name: 'Peculiar Badejo', score: '83', time: '2 hrs 22 mins', dateTime: 'Feb6, 11:43 AM' },
-        { name: 'Peculiar Badejo', score: '83', time: '2 hrs 22 mins', dateTime: 'Feb6, 11:43 AM' },
-        { name: 'Peculiar Badejo', score: '83', time: '2 hrs 22 mins', dateTime: 'Feb6, 11:43 AM' },
-        { name: 'Peculiar Badejo', score: '83', time: '2 hrs 22 mins', dateTime: 'Feb6, 11:43 AM' },
-        { name: 'Peculiar Badejo', score: '83', time: '2 hrs 22 mins', dateTime: 'Feb6, 11:43 AM' },
-        { name: 'Peculiar Badejo', score: '83', time: '2 hrs 22 mins', dateTime: 'Feb6, 11:43 AM' },
+        { icon: 'PB', name: 'Peculiar Badejo', score: '83', time: '2 hrs 22 mins', dateTime: 'Feb6, 11:43 AM' },
+        { icon: 'DF', name: 'Daniel favour', score: '70', time: '2 hrs 23 mins', dateTime: 'Feb6, 11:44 AM' },
+        { icon: 'CJ', name: 'Chris Johnson', score: '78', time: '2 hrs 24 mins', dateTime: 'Feb6, 11:45 AM' },
+        { icon: 'TB', name: 'Temi Bayo', score: '72', time: '2 hrs 25 mins', dateTime: 'Feb6, 11:46 AM' },
+        { icon: 'TB', name: 'Tolu Bello', score: '60', time: '2 hrs 26 mins', dateTime: 'Feb6, 11:47 AM' },
+        { icon: 'SJ', name: 'Samuel John', score: '73', time: '2 hrs 27 mins', dateTime: 'Feb6, 11:48 AM' },
+        { icon: 'LB', name: 'Lucky Benjamin', score: '88', time: '2 hrs 28 mins', dateTime: 'Feb6, 11:49 AM' },
     ]
 
     const [show, setShow] = useState(false);
@@ -89,11 +87,11 @@ const Page = () => {
                         <div className={styles['invitation-status']}>
                             <div>
                                 <IoListOutline />
-                                200 total invitations
+                                10 total invitations
                             </div>
                             <div>
                                 <LuLoader />
-                                80 pending invitations
+                                3 pending invitations
                             </div>
                         </div>
                     </div>
@@ -114,7 +112,7 @@ const Page = () => {
                             <div key={index} className={styles["table-row"]}>
 
                                 <div className={styles["row-name"]}>
-                                    <div className={styles['circle']} style={{ backgroundColor: getRandomHexColor() }}>PB</div>
+                                    <div className={styles['circle']} style={{ backgroundColor: getRandomHexColor() }}>{student.icon}</div>
                                     {student.name}</div>
                                 <div className={styles["row-email"]}> {student.email}</div>
                                 <div className={styles["row-date"]}> {student.date}</div>
@@ -142,7 +140,7 @@ const Page = () => {
                             <div key={index} className={styles["table-row"]}>
 
                                 <div className={styles["row-name"]}>
-                                    <div className={styles['circle']} style={{ backgroundColor: getRandomHexColor() }}>PB</div>
+                                    <div className={styles['circle']} style={{ backgroundColor: getRandomHexColor() }}>{student.icon}</div>
                                     {student.name}</div>
                                 <div className={styles["row-score"]}> {student.score}</div>
                                 <div className={styles["row-time"]}> {student.time}</div>
