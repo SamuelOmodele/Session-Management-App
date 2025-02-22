@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import styles from './modal.module.css'
 import { IoAddOutline, IoClose } from "react-icons/io5";
 import { PiCopySimpleFill } from 'react-icons/pi';
+import { FaCheck } from "react-icons/fa6";
+import { useDispatch } from 'react-redux';
+import { setIsModalOpen } from '@/redux/modalSlice';
 
 
 const Modal = () => {
@@ -23,36 +26,51 @@ const Modal = () => {
     }
   };
 
+  const [langaugeIndexList, setLanguageIndexList] = useState([]);
+
+  const addtolist = (number) => {
+    if (langaugeIndexList.includes(number)){
+      setLanguageIndexList(prev => prev.filter(item => item !== number));
+      return;
+    }
+    setLanguageIndexList(prev => [...prev, number]);
+  }
+
+  const dispatch = useDispatch();
+  const closeModal = () => {
+    dispatch(setIsModalOpen(false));
+  }
+
   return (
     <div className={styles['modal-page']}>
       <div className={styles['modal-container']}>
         <div className={styles['modal-head']}>
           <h3>Create Session</h3>
-          <IoClose />
+          <IoClose onClick={closeModal} className={styles['close-icon']} />
         </div>
         <div className={styles['modal-body']}>
 
           {/* --- SIDEBAR --- */}
           <div className={styles['sidebar']}>
-            <div className={styles['menu']} onClick={() => setFormStep(1)}>
-              <div className={styles['circle-no']} id={formstep === 1 ? styles['active'] : styles['']}>1</div>
-              Session Initialization
+            <div className={styles['menu']}>
+              <div className={styles['circle-no']} id={formstep >= 1 ? styles['active'] : styles['']}>{formstep > 1 ? <FaCheck /> : 1}</div>
+              <p className={formstep >= 1 ? styles['active-text'] : styles['inactive-text']}>Session Initialization</p>
             </div>
-            <div className={styles['menu']} onClick={() => setFormStep(2)}>
-              <div className={styles['circle-no']} id={formstep === 2 ? styles['active'] : styles['']}>2</div>
-              Content configuration
+            <div className={styles['menu']}>
+              <div className={styles['circle-no']} id={formstep >= 2 ? styles['active'] : styles['']}>{formstep > 2 ? <FaCheck /> : 2}</div>
+              <p className={formstep >= 2 ? styles['active-text'] : styles['inactive-text']}>Content configuration </p>
             </div>
-            <div className={styles['menu']} onClick={() => setFormStep(3)}>
-              <div className={styles['circle-no']} id={formstep === 3 ? styles['active'] : styles['']}>3</div>
-              Group management
+            <div className={styles['menu']}>
+              <div className={styles['circle-no']} id={formstep >= 3 ? styles['active'] : styles['']}>{formstep > 3 ? <FaCheck /> : 3}</div>
+              <p className={formstep >= 3 ? styles['active-text'] : styles['inactive-text']}>Group management</p>
             </div>
-            <div className={styles['menu']} onClick={() => setFormStep(4)}>
-              <div className={styles['circle-no']} id={formstep === 4 ? styles['active'] : styles['']}>4</div>
-              Student enrollment
+            <div className={styles['menu']}>
+              <div className={styles['circle-no']} id={formstep >= 4 ? styles['active'] : styles['']}>{formstep > 4 ? <FaCheck /> : 4}</div>
+              <p className={formstep >= 4 ? styles['active-text'] : styles['inactive-text']}>Student enrollment</p>
             </div>
-            <div className={styles['menu']} onClick={() => setFormStep(5)}>
-              <div className={styles['circle-no']} id={formstep === 5 ? styles['active'] : styles['']}>5</div>
-              Confirmation
+            <div className={styles['menu']}>
+              <div className={styles['circle-no']} id={formstep >= 5 ? styles['active'] : styles['']}>{formstep > 5 ? <FaCheck /> : 5}</div>
+              <p className={formstep >= 5 ? styles['active-text'] : styles['inactive-text']}>Confirmation</p>
             </div>
 
           </div>
@@ -63,10 +81,10 @@ const Modal = () => {
               <div className={styles['content1']}>
                 <div className={styles['group']}>
                   <p>Select supported programming languages</p>
-                  <div className={styles['language']}>Python</div>
-                  <div className={styles['language']}>MySQL</div>
-                  <div className={styles['language']}>C#</div>
-                  <div className={styles['language']}>Matlab</div>
+                  <div className={ langaugeIndexList.includes(1) ? styles['active-language'] : styles['language']} onClick={() => addtolist(1)}>Python {langaugeIndexList.includes(1) && <IoClose size={18} />} </div>
+                  <div className={ langaugeIndexList.includes(2) ? styles['active-language'] : styles['language']} onClick={() => addtolist(2)}>MySQL {langaugeIndexList.includes(2) && <IoClose size={18}/>} </div>
+                  <div className={ langaugeIndexList.includes(3) ? styles['active-language'] : styles['language']} onClick={() => addtolist(3)}>C# {langaugeIndexList.includes(3) && <IoClose size={18}/>} </div>
+                  <div className={ langaugeIndexList.includes(4) ? styles['active-language'] : styles['language']} onClick={() => addtolist(4)}>Matlab {langaugeIndexList.includes(4) && <IoClose size={18}/>} </div>
                 </div>
                 <div className={styles['group']}>
                   <p>Set duration for the session</p>
@@ -183,8 +201,10 @@ const Modal = () => {
           </div>
         </div>
         <div className={styles['modal-footer']}>
-          <button>Discard changes</button>
-          <button>Continue</button>
+          {formstep > 1 && <p onClick={() => setFormStep(formstep => formstep - 1)}>Back</p>}
+          <button className={styles['discard-btn']}>Discard changes</button>
+          {formstep < 5 &&  <button onClick={() => setFormStep(formstep => formstep + 1)}>Continue</button>}
+          {formstep === 5 &&  <button>Submit</button>}
         </div>
       </div>
     </div>
