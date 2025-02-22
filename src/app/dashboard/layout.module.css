@@ -1,7 +1,8 @@
 .layout{
     display: flex;
-    background-color: #F6F8FA;
+    background-color: hsl(210, 29%, 97%);
     position: relative;
+    overflow-y: hidden;
 }
 .sidebar-container{
     width: 260px;
@@ -10,17 +11,13 @@
 }
 .children-container{
     width: calc(100% - 260px);
-    height: 100%;
-    overflow-y: hidden;
+    height: 100vh;
     margin-left: 260px;
 }
 .modal-overlay{
     position: absolute;
     width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 100%;
     background-color: rgb(0, 0, 0, 0.4);
     z-index: 500;
 }

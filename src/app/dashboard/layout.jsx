@@ -6,9 +6,9 @@ import Modal from '@/components/modal/modal'
 const Layout = ({ children }) => {
   return (
       <div className={styles['layout']}>
-        {/* <div className={styles['modal-overlay']}>
+        <div className={styles['modal-overlay']}>
           <Modal />
-        </div> */}
+        </div>
         <div className={styles['sidebar-container']}>
           <Sidebar />
         </div>

@@ -1,6 +1,13 @@
+.modal-page{
+    /* padding: 50px; */
+    overflow-y: auto;
+    height: 100vh;
+    justify-content: center;
+}
 .modal-container{
-    width: 700px;
+    width: 800px;
     background-color: white;
+    margin: 50px auto;
 }
 .modal-head{
     padding: 20px;
@@ -15,4 +22,151 @@
 .sidebar{
     width: 30%;
     border: 1px solid #F2F9F9;
+}
+.menu{
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+    gap: 10px;
+    padding-left: 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.circle-no{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #E0EAE9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 14px;
+}
+#active{
+    background-color: #204E4C;
+    color: white;
+}
+.modal-footer{
+    width: 100%;
+    padding: 25px 20px;
+    box-shadow: 0 -4px 8px 0 #E5ECEB80;
+    display: flex;
+    justify-content: right;
+    gap: 15px;
+    background-color: white;
+}
+.modal-footer button{
+    width: fit-content;
+    padding: 10px 15px;
+    font-size: 14.5px;
+    border-radius: 10px;
+    background-color: #204E4C;
+    color: white;
+    outline: none;
+    border: none;
+}
+.modal-footer button:first-child{
+    border: 1px solid #C8D1D0;
+    color: #000;
+    background-color: white;
+}
+.content{
+    padding: 30px;
+    width: 70%;
+}
+.group{
+    margin-bottom: 20px;
+    font-size: 15px;
+    /* background-color: red; */
+    width: 100%;
+}
+.group > p{
+    margin-bottom: 15px;
+}
+.language{
+    border: 1px solid #ECEDED;
+    padding: 7px 15px;
+    border-radius: 5px;
+    width: fit-content;
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 14px;
+}
+.group input, .group select, .group textarea{
+    padding: 11px 20px;
+    border-radius: 7px;
+    border: 1.5px solid #ECEDED;
+    width: 45%;
+    display: inline-block;
+    appearance: none;
+    font-size: 15px;
+    font-family: 'Aeonik';
+    outline: none;
+    resize: none;
+}
+.group input:focus, .group select:focus, .group textarea:focus{
+    border: 1.5px solid #204E4C;
+}
+.attach, .allow{
+    font-size: 14.5px;
+    margin: 5px 0 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.toggle-container {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    background-color: #204E4C;
+    width: 52px;
+    height: 28px;
+    border-radius: 30px;
+    padding: 0 3px;
+}
+
+.toggle-circle {
+    background-color: #E0EAE9;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+}
+.add{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 16px;
+}
+.link {
+    display: flex;
+    font-size: 14px;
+    background-color: #F0F9F8;
+    color: #0F1419;
+    padding: 15px;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.link p {
+    font-weight: 500;
+    width: 70%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.link span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #204E4C;
+    font-weight: 500;
+    cursor: pointer;
+}
+.group span{
+    color: #414141;
+    font-size: 14px;
 }
