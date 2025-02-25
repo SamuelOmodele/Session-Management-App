@@ -29,7 +29,7 @@ const Modal = () => {
   const [langaugeIndexList, setLanguageIndexList] = useState([]);
 
   const addtolist = (number) => {
-    if (langaugeIndexList.includes(number)){
+    if (langaugeIndexList.includes(number)) {
       setLanguageIndexList(prev => prev.filter(item => item !== number));
       return;
     }
@@ -40,6 +40,10 @@ const Modal = () => {
   const closeModal = () => {
     dispatch(setIsModalOpen(false));
   }
+
+  const [totalQuestionNumber, setTotalQuestionNumber] = useState(1);
+  const [allowReviewReport, setAllowReviewReport] = useState(true);
+
 
   return (
     <div className={styles['modal-page']}>
@@ -81,10 +85,10 @@ const Modal = () => {
               <div className={styles['content1']}>
                 <div className={styles['group']}>
                   <p>Select supported programming languages</p>
-                  <div className={ langaugeIndexList.includes(1) ? styles['active-language'] : styles['language']} onClick={() => addtolist(1)}>Python {langaugeIndexList.includes(1) && <IoClose size={18} />} </div>
-                  <div className={ langaugeIndexList.includes(2) ? styles['active-language'] : styles['language']} onClick={() => addtolist(2)}>MySQL {langaugeIndexList.includes(2) && <IoClose size={18}/>} </div>
-                  <div className={ langaugeIndexList.includes(3) ? styles['active-language'] : styles['language']} onClick={() => addtolist(3)}>C# {langaugeIndexList.includes(3) && <IoClose size={18}/>} </div>
-                  <div className={ langaugeIndexList.includes(4) ? styles['active-language'] : styles['language']} onClick={() => addtolist(4)}>Matlab {langaugeIndexList.includes(4) && <IoClose size={18}/>} </div>
+                  <div className={langaugeIndexList.includes(1) ? styles['active-language'] : styles['language']} onClick={() => addtolist(1)}>Python {langaugeIndexList.includes(1) && <IoClose size={18} />} </div>
+                  <div className={langaugeIndexList.includes(2) ? styles['active-language'] : styles['language']} onClick={() => addtolist(2)}>MySQL {langaugeIndexList.includes(2) && <IoClose size={18} />} </div>
+                  <div className={langaugeIndexList.includes(3) ? styles['active-language'] : styles['language']} onClick={() => addtolist(3)}>C# {langaugeIndexList.includes(3) && <IoClose size={18} />} </div>
+                  <div className={langaugeIndexList.includes(4) ? styles['active-language'] : styles['language']} onClick={() => addtolist(4)}>Matlab {langaugeIndexList.includes(4) && <IoClose size={18} />} </div>
                 </div>
                 <div className={styles['group']}>
                   <p>Set duration for the session</p>
@@ -112,39 +116,42 @@ const Modal = () => {
             {/* --- STEP 2 --- */}
             {formstep === 2 &&
               <div className={styles['content1']}>
-                <div className={styles['group']}>
-                  <p>Question 1</p>
-                  <textarea name="" id="" placeholder='Enter question 1' style={{ width: '100%' }} rows={7}></textarea>
-                </div>
-                <div className={styles['group']} style={{ marginBottom: '5px' }}>
-                  <p>Instruction for question 1 (if any)</p>
-                  <textarea name="" id="" placeholder='Enter Instruction' style={{ width: '100%' }} rows={7}></textarea>
-                </div>
-                <div className={styles['attach']}>
-                  <input type="checkbox" style={{ Width: '10px' }} name="" id="" />
-                  <p>Attach this instruction for all questions</p>
-                </div>
-                <div className={styles['group']}>
-                  <p>Set question 1 value</p>
-                  <input type="number" placeholder='Enter total score/weight' style={{ marginRight: '20px' }} />
-                  <input type="number" name="" id="" placeholder='Enter score percentage' />
-                </div>
-                <div className={styles['group']}>
-                  <p>Input data for question 1</p>
-                  <textarea name="" id="" placeholder='Enter Input data or link' style={{ width: '100%' }} rows={7}></textarea>
-                </div>
-                <div className={styles['group']}>
-                  <p>Expected output for question 1</p>
-                  <textarea name="" id="" placeholder='Enter Expected output' style={{ width: '100%' }} rows={7}></textarea>
-                </div>
-
+                {Array.from({ length: totalQuestionNumber }, (_, index) => (
+                  <div key={index}>
+                    <div className={styles['group']}>
+                      <p>Question {index + 1} </p>
+                      <textarea name="" id="" placeholder='Enter question 1' style={{ width: '100%' }} rows={7}></textarea>
+                    </div>
+                    <div className={styles['group']} style={{ marginBottom: '5px' }}>
+                      <p>Instruction for question {index + 1} (if any)</p>
+                      <textarea name="" id="" placeholder='Enter Instruction' style={{ width: '100%' }} rows={7}></textarea>
+                    </div>
+                    <div className={styles['attach']}>
+                      <input type="checkbox" style={{ Width: '10px' }} name="" id="" />
+                      <p>Attach this instruction for all questions</p>
+                    </div>
+                    <div className={styles['group']}>
+                      <p>Set question {index + 1} value</p>
+                      <input type="number" placeholder='Enter total score/weight' style={{ marginRight: '20px' }} />
+                      <input type="number" name="" id="" placeholder='Enter score percentage' />
+                    </div>
+                    <div className={styles['group']}>
+                      <p>Input data for question {index + 1}</p>
+                      <textarea name="" id="" placeholder='Enter Input data or link' style={{ width: '100%' }} rows={7}></textarea>
+                    </div>
+                    <div className={styles['group']}>
+                      <p>Expected output for question {index + 1}</p>
+                      <textarea name="" id="" placeholder='Enter Expected output' style={{ width: '100%' }} rows={7}></textarea>
+                    </div>
+                  </div>
+                ))}
                 <div className={styles['allow']}>
                   <p>Allow students to get review report after grading</p>
-                  <div className={styles['toggle-container']}>
-                    <div className={styles['toggle-circle']}></div>
+                  <div className={styles['toggle-container']} style={{ backgroundColor: allowReviewReport ? '' : '#969696', cursor: 'pointer' }} onClick={() => setAllowReviewReport(value => !value)}>
+                    <div className={styles['toggle-circle']} style={{ marginLeft: allowReviewReport ? 'auto' : '0' }}></div>
                   </div>
                 </div>
-                <div className={styles['add']}>
+                <div className={styles['add']} onClick={() => setTotalQuestionNumber(number => number + 1)}>
                   <IoAddOutline size={22} />
                   <p> Add another question</p>
                 </div>
@@ -169,7 +176,7 @@ const Modal = () => {
 
             {formstep === 4 &&
               <div className={styles['content1']}>
-                <div className={styles['group']} style={{marginBottom: '15px'}}>
+                <div className={styles['group']} style={{ marginBottom: '15px' }}>
                   <p>Enrollment method</p>
                   <select name="" id="" style={{ width: '100%' }}>
                     <option value="">Share invitation link</option>
@@ -193,7 +200,7 @@ const Modal = () => {
 
             {formstep === 5 &&
               <div className={styles['content1']}>
-                <div className={styles['group']} style={{marginBottom: '15px'}}>
+                <div className={styles['group']} style={{ marginBottom: '15px' }}>
                   <p>All set?</p>
                   <span>Clicking the Submit button below confirms that all has been set for this session.</span>
                 </div>
@@ -203,8 +210,8 @@ const Modal = () => {
         <div className={styles['modal-footer']}>
           {formstep > 1 && <p onClick={() => setFormStep(formstep => formstep - 1)}>Back</p>}
           <button className={styles['discard-btn']}>Discard changes</button>
-          {formstep < 5 &&  <button onClick={() => setFormStep(formstep => formstep + 1)}>Continue</button>}
-          {formstep === 5 &&  <button>Submit</button>}
+          {formstep < 5 && <button onClick={() => setFormStep(formstep => formstep + 1)}>Continue</button>}
+          {formstep === 5 && <button>Submit</button>}
         </div>
       </div>
     </div>
