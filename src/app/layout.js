@@ -1,3 +1,4 @@
+import Modal from '@/components/modal/modal';
 import './globals.css'
 import Providers from '@/redux/provider';
 
