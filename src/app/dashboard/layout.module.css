@@ -1,6 +1,6 @@
 .layout{
     display: flex;
-    background-color: hsl(210, 29%, 97%);
+    background-color: #f5f7fa;
     position: relative;
     overflow-y: hidden;
 }

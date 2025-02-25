@@ -43,13 +43,10 @@ const AllSessions = () => {
         </div>
 
         <div className={styles['session-card-container']}>
-          <SessionCard status={'ONGOING'} />
-          <SessionCard status={'ONGOING'} />
-          <SessionCard status={'COMPLETED'} />
-          <SessionCard status={'COMPLETED'} />
-          <SessionCard status={'CANCELLED'} />
-          <SessionCard status={'COMPLETED'} />
-          <SessionCard status={'COMPLETED'} />
+          <SessionCard status={'ONGOING'} title={'Data Structures Lab Assignment - CSC301'} description={'Implement linked lists and perform basic operations such as insertion, deletion, and traversal.'} />
+          <SessionCard status={'ONGOING'} title={'Mobile App Development Workshop - CSC412'} description={' Develop a To-Do List web application using React for the frontend, PHP for the backend, and MySQL for the database. The application should allow users to add, complete, and delete tasks.'} />
+          <SessionCard status={'COMPLETED'} title={'Python Programming Assignment - CSC 101'} description={'Write a python program to calculate the first 50 terms in a fibonacci series. '} />
+          <SessionCard status={'CANCELLED'} title={'Web Programming Assignment - CSC 293'} description={'Develop a personal e commerce website. In the website, you must implement register and login operations using mysql '} />
         </div>
 
       </div>
