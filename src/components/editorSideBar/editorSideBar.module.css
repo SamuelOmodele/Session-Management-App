@@ -1,0 +1,68 @@
+.sidebar {
+  flex: 1;
+  background-color: #ffffff;
+  min-height: 100vh;
+  border-right: 1px solid #ddd;
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.logo-container {
+  border-bottom: 1px solid #e8ebef;
+  padding: 20px;
+}
+.logo {
+  background-color: #204e4c;
+  color: white;
+  font-size: 15px;
+  border-radius: 13px;
+  width: 100%;
+  text-align: center;
+  height: 48px;
+  line-height: 47px;
+}
+.box {
+  border-bottom: 1px solid #f2f9f9;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.title {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21.6px;
+  cursor: pointer;
+}
+
+.box ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.box ul li {
+  display: flex;
+  justify-content: space-between;
+}
+.box button {
+  cursor: pointer;
+  width: 50%;
+  margin: 0 auto;
+  background-color: #204e4c;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+}
+.box button:hover {
+  transform: scale(1.1);
+}
+
+.run-code {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.run-code svg {
+  cursor: pointer;
+}

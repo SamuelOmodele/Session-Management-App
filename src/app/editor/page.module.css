@@ -1,0 +1,22 @@
+.container {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.container h3 {
+  border-bottom: 1px solid #dfdfdf;
+  padding-bottom: 10px;
+}
+.submitButton {
+  cursor: pointer;
+  width: 50%;
+  margin-left: auto;
+  background-color: #204e4c;
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+}
+.submitButtonbutton:hover {
+  transform: scale(1.1);
+}
