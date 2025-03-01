@@ -95,6 +95,8 @@ const Modal = () => {
                   <input type="number" placeholder='Enter number' style={{ marginRight: '20px' }} />
                   <select name="" id="">
                     <option value="">Hours</option>
+                    <option value="">Days</option>
+                    <option value="">Weeks</option>
                   </select>
                 </div>
                 <div className={styles['group']}>
