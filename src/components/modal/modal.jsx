@@ -6,6 +6,9 @@ import { PiCopySimpleFill } from 'react-icons/pi';
 import { FaCheck } from "react-icons/fa6";
 import { useDispatch } from 'react-redux';
 import { setIsModalOpen } from '@/redux/modalSlice';
+import { BsCloudUpload } from "react-icons/bs";
+import Papa from "papaparse";
+import * as XLSX from "xlsx";
 
 
 const Modal = () => {
@@ -13,6 +16,8 @@ const Modal = () => {
   const [formstep, setFormStep] = useState(1);
 
   const [copied, setCopied] = useState(false);
+  const [enrollmentMethod, setEnrollmentMethod] = useState('file');
+
   const link = "https://sessionmgtsite.com/session/s3201";
 
   const handleCopy = async () => {
@@ -26,15 +31,7 @@ const Modal = () => {
     }
   };
 
-  const [langaugeIndexList, setLanguageIndexList] = useState([]);
-
-  const addtolist = (number) => {
-    if (langaugeIndexList.includes(number)) {
-      setLanguageIndexList(prev => prev.filter(item => item !== number));
-      return;
-    }
-    setLanguageIndexList(prev => [...prev, number]);
-  }
+  const [languageIndex, setLanguageIndex] = useState('');
 
   const dispatch = useDispatch();
   const closeModal = () => {
@@ -43,7 +40,115 @@ const Modal = () => {
 
   const [totalQuestionNumber, setTotalQuestionNumber] = useState(1);
   const [allowReviewReport, setAllowReviewReport] = useState(true);
+  const [students, setStudents] = useState([]);
+  const [studentName, setStudentName] = useState('');
+  const [studentMatricNo, setStudentMatricNo] = useState('');
 
+  const updateLanguage = (index) => {
+    if (languageIndex) {
+      if (languageIndex === index) {
+        setLanguageIndex('');
+      } else {
+        setLanguageIndex(index);
+      }
+    } else {
+      setLanguageIndex(index)
+    }
+  }
+
+  // const handleFileUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   console.log(file)
+  //   if (!file) {
+  //     console.log('nothing');
+  //     return;
+  //   };
+
+  //   // Ensure file is a CSV
+  //   if (file.type !== "text/csv") {
+  //     alert("Please upload a valid CSV file.");
+  //     return;
+  //   }
+
+
+  //   const reader = new FileReader();
+  //   reader.onload = ({ target }) => {
+  //     const csv = target.result;
+  //     Papa.parse(csv, {
+  //       header: true, // Treat first row as column names
+  //       skipEmptyLines: true, // Ignore empty rows
+  //       complete: (result) => {
+  //         const formattedData = result.data.map((row) => ({
+  //           matricNumber: row["matric_no"],
+  //           fullName: row["Fullname"],
+  //         }));
+  //         setStudents(formattedData);
+  //       },
+  //     });
+  //   };
+  //   reader.readAsText(file);
+  // };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+
+    const reader = new FileReader();
+    reader.onload = ({ target }) => {
+      const data = target.result;
+
+      if (fileExtension === "csv") {
+        // Parse CSV file
+        Papa.parse(data, {
+          header: true, // Assumes first row contains column names
+          skipEmptyLines: true,
+          complete: (result) => {
+            const parsedData = result.data.map((row) => ({
+              matricNumber: row["Matric Number"],
+              fullName: row["Full Name"],
+            }));
+            setStudents(parsedData);
+          },
+        });
+      } else if (["xls", "xlsx"].includes(fileExtension)) {
+        // Parse Excel file
+        const workbook = XLSX.read(data, { type: "binary" });
+        const sheetName = workbook.SheetNames[0];
+        const sheetData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+        const parsedData = sheetData.map((row) => ({
+          matricNumber: row["Matric Number"],
+          fullName: row["Full Name"],
+        }));
+
+        setStudents(parsedData);
+      } else {
+        alert("Unsupported file type! Please upload CSV or Excel files.");
+      }
+    };
+
+    if (fileExtension === "csv") {
+      reader.readAsText(file);
+    } else {
+      reader.readAsBinaryString(file);
+    }
+  };
+
+  const addStudent = () => {
+    if (!studentName || !studentMatricNo) {
+      return;
+    }
+    setStudents(prevStudents => [
+      ...prevStudents,
+      { matricNumber: studentMatricNo, fullName: studentName }
+    ]);
+
+    // Optionally clear input fields after adding
+    setStudentName('');
+    setStudentMatricNo('');
+  }
 
   return (
     <div className={styles['modal-page']}>
@@ -66,16 +171,16 @@ const Modal = () => {
             </div>
             <div className={styles['menu']}>
               <div className={styles['circle-no']} id={formstep >= 3 ? styles['active'] : styles['']}>{formstep > 3 ? <FaCheck /> : 3}</div>
-              <p className={formstep >= 3 ? styles['active-text'] : styles['inactive-text']}>Group management</p>
+              <p className={formstep >= 3 ? styles['active-text'] : styles['inactive-text']}>Student enrollment</p>
             </div>
             <div className={styles['menu']}>
               <div className={styles['circle-no']} id={formstep >= 4 ? styles['active'] : styles['']}>{formstep > 4 ? <FaCheck /> : 4}</div>
-              <p className={formstep >= 4 ? styles['active-text'] : styles['inactive-text']}>Student enrollment</p>
+              <p className={formstep >= 4 ? styles['active-text'] : styles['inactive-text']}>Confirmation</p>
             </div>
-            <div className={styles['menu']}>
+            {/* <div className={styles['menu']}>
               <div className={styles['circle-no']} id={formstep >= 5 ? styles['active'] : styles['']}>{formstep > 5 ? <FaCheck /> : 5}</div>
-              <p className={formstep >= 5 ? styles['active-text'] : styles['inactive-text']}>Confirmation</p>
-            </div>
+              <p className={formstep >= 5 ? styles['active-text'] : styles['inactive-text']}></p>
+            </div> */}
 
           </div>
 
@@ -85,18 +190,16 @@ const Modal = () => {
               <div className={styles['content1']}>
                 <div className={styles['group']}>
                   <p>Select supported programming languages</p>
-                  <div className={langaugeIndexList.includes(1) ? styles['active-language'] : styles['language']} onClick={() => addtolist(1)}>Python {langaugeIndexList.includes(1) && <IoClose size={18} />} </div>
-                  <div className={langaugeIndexList.includes(2) ? styles['active-language'] : styles['language']} onClick={() => addtolist(2)}>MySQL {langaugeIndexList.includes(2) && <IoClose size={18} />} </div>
-                  <div className={langaugeIndexList.includes(3) ? styles['active-language'] : styles['language']} onClick={() => addtolist(3)}>C# {langaugeIndexList.includes(3) && <IoClose size={18} />} </div>
-                  <div className={langaugeIndexList.includes(4) ? styles['active-language'] : styles['language']} onClick={() => addtolist(4)}>Matlab {langaugeIndexList.includes(4) && <IoClose size={18} />} </div>
+                  <div className={languageIndex === 1 ? styles['active-language'] : styles['language']} onClick={() => updateLanguage(1)}>Python {languageIndex === 1 && <IoClose size={18} />} </div>
+                  <div className={languageIndex === 2 ? styles['active-language'] : styles['language']} onClick={() => updateLanguage(2)}>MySQL {languageIndex === 2 && <IoClose size={18} />} </div>
+                  <div className={languageIndex === 3 ? styles['active-language'] : styles['language']} onClick={() => updateLanguage(3)}>C# {languageIndex === 3 && <IoClose size={18} />} </div>
+                  <div className={languageIndex === 4 ? styles['active-language'] : styles['language']} onClick={() => updateLanguage(4)}>Matlab {languageIndex === 4 && <IoClose size={18} />} </div>
                 </div>
                 <div className={styles['group']}>
-                  <p>Set duration for the session</p>
-                  <input type="number" placeholder='Enter number' style={{ marginRight: '20px' }} />
-                  <select name="" id="">
-                    <option value="">Hours</option>
-                  </select>
+                  <p>Language version</p>
+                  <input style={{ width: '100%' }} type="number" placeholder='Enter language version' />
                 </div>
+
                 <div className={styles['group']}>
                   <p>When will this session start?</p>
                   <input type="date" placeholder='Select date' style={{ marginRight: '20px' }} />
@@ -159,35 +262,47 @@ const Modal = () => {
 
             {formstep === 3 &&
               <div className={styles['content1']}>
-                <div className={styles['group']}>
-                  <p>Collaborative work settings</p>
-                  <select name="" id="" style={{ width: '100%' }}>
-                    <option value="">Single work group for the entire session</option>
-                  </select>
-                </div>
-                <div className={styles['group']}>
-                  <p>Group access type</p>
-                  <select name="" id="" style={{ width: '100%' }}>
-                    <option value="">Open</option>
-                    <option value="">Close</option>
-                  </select>
-                </div>
-              </div>}
-
-            {formstep === 4 &&
-              <div className={styles['content1']}>
                 <div className={styles['group']} style={{ marginBottom: '15px' }}>
                   <p>Enrollment method</p>
-                  <select name="" id="" style={{ width: '100%' }}>
-                    <option value="">Share invitation link</option>
+                  <select name="" id="" value={enrollmentMethod} style={{ width: '100%' }} onChange={(e) => { setEnrollmentMethod(e.target.value); setStudents([]) }}>
+                    <option value="file">Add student from file</option>
+                    <option value="direct" >Direct invitation</option>
                   </select>
                 </div>
 
-                <div className={styles['link']}>
+                {/* <div className={styles['link']}>
                   <p>sessionmgtsite.com/session/s3201</p>
                   <span onClick={handleCopy}>{copied ? "Copied!" : "Copy"} <PiCopySimpleFill /></span>
-                </div>
+                </div> */}
+                {enrollmentMethod === 'file' && <label htmlFor='file'>
+                  <div className={styles['upload-container']}>
+                    <BsCloudUpload className={styles['upload-icon']} />
+                    <p className={styles['text1']}>Click to upload</p>
+                    <p className={styles['text2']}>CSV or XLS file up to 10mb. Ensure columns are labelled 'Full Name' and 'Matric Number'</p>
+                    <input type="file" name="" id="file" accept=".csv,.xls,.xlsx" onChange={handleFileUpload} style={{ display: 'none' }} />
+                  </div>
+                </label>}
+                {console.log(students)}
 
+                {enrollmentMethod === 'direct' &&
+                  <div className={styles['group']}>
+                    <p>Student Information to invite</p>
+                    <input type="text" placeholder='Enter student full name' style={{ marginRight: '20px' }} value={studentName} onChange={(e) => setStudentName(e.target.value)} />
+                    <input type="text" placeholder='Enter student matric number' value={studentMatricNo} onChange={(e) => setStudentMatricNo(e.target.value)} />
+                    <button className={styles['add-student']} onClick={addStudent}>Add</button>
+                  </div>
+                }
+
+                <div className={styles['student-container']}>
+                  <h4 className={styles['student-head-text']}>Students</h4>
+                  {students?.map((student, index) => (
+                    <div key={index} className={styles['student-box']}>
+                      <p>{student.fullName}</p>
+                      <p>{student.matricNumber}</p>
+                    </div>
+
+                  ))}
+                </div>
                 <div className={styles['group']}>
                   <p>When will invitation expire? (Optional)</p>
                   <input type="number" placeholder='Enter number' style={{ marginRight: '20px' }} />
@@ -198,7 +313,7 @@ const Modal = () => {
 
               </div>}
 
-            {formstep === 5 &&
+            {formstep === 4 &&
               <div className={styles['content1']}>
                 <div className={styles['group']} style={{ marginBottom: '15px' }}>
                   <p>All set?</p>
@@ -207,11 +322,12 @@ const Modal = () => {
               </div>}
           </div>
         </div>
+
         <div className={styles['modal-footer']}>
           {formstep > 1 && <p onClick={() => setFormStep(formstep => formstep - 1)}>Back</p>}
           <button className={styles['discard-btn']}>Discard changes</button>
-          {formstep < 5 && <button onClick={() => setFormStep(formstep => formstep + 1)}>Continue</button>}
-          {formstep === 5 && <button>Submit</button>}
+          {formstep < 4 && <button onClick={() => setFormStep(formstep => formstep + 1)}>Continue</button>}
+          {formstep === 4 && <button>Submit</button>}
         </div>
       </div>
     </div>
