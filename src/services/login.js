@@ -1,4 +1,5 @@
 import createAxiosInstance from "../lib/axios";
+import { showToast } from "./toastNotifications";
 import {
   fetchProfileStart,
   fetchProfileSuccess,
@@ -19,8 +20,10 @@ export const login = async ({ username, password }) => {
       // localStorage.setItem("token", token);
       // localStorage.setItem("userDetails", JSON.stringify(details));
       // Return the relevant data
+      showToast("Successful Login");
       return { token, details };
     } else {
+      showToast(res.data.message, "error");
       // Handle unsuccessful login attempt
       throw new Error(res.data.message);
     }
@@ -37,14 +40,25 @@ export const resetPassword = async ({
   confirm_password,
 }) => {
   try {
+    console.log("Sending data:", {
+      username,
+      current_password,
+      password,
+      confirm_password,
+    });
+
     const res = await axiosInstance.post(`web/update_user_auth`, {
       username,
       current_password,
       password,
       confirm_password,
     });
+    if (res.data.status) {
+      showToast("Password changed successfully");
+    } else {
+      showToast(res.data.message, "error");
+    }
     return res.data;
-    console.log(res.data);
   } catch (error) {
     console.log(error);
   }

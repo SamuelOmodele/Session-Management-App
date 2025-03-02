@@ -35,7 +35,11 @@ const Page = () => {
       if (response) {
         // Assume storeTokens is defined elsewhere
         storeTokens(response.token, response.refresh_token);
-        router.push("/new-password");
+        if (response.details.has_change_password) {
+          router.push("/dashboard");
+        } else {
+          router.push("/new-password");
+        }
       } else {
         console.log("error during login: ", response);
       }
@@ -45,7 +49,7 @@ const Page = () => {
   });
 
   return (
-    <section className={styles["auth-container"]}>
+    <div className={styles["auth-container"]}>
       <div className={styles["logo-container"]}>
         <div className={styles["logo"]}>LOGO</div>
       </div>
@@ -85,7 +89,7 @@ const Page = () => {
           <button>Log In</button>
         </form>
       </div>
-    </section>
+    </div>
   );
 };
 

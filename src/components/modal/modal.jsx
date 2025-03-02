@@ -43,6 +43,25 @@ const Modal = () => {
   const [totalTestCaseNumber, setTotalTestCaseNumber] = useState(
     Array(totalQuestionNumber).fill(1)
   );
+  const [flagState, setFlagState] = useState(
+    Array(totalQuestionNumber)
+      .fill([])
+      .map(() => Array(4).fill(false))
+  );
+
+  const handleFlagChange = (e, questionIndex, flagIndex) => {
+    const newFlagState = [...flagState];
+    newFlagState[questionIndex][flagIndex] = e.target.checked;
+    setFlagState(newFlagState);
+  };
+
+  const handleContinue = () => {
+    if (validateWeights()) {
+      // Proceed to the next step if validation passes
+      setFormStep((prevStep) => prevStep + 1);
+    }
+  };
+
   const [allowReviewReport, setAllowReviewReport] = useState(true);
 
   return (
@@ -340,6 +359,9 @@ const Modal = () => {
                           <input
                             type="checkbox"
                             id={`flag-${index}-${flagIndex}`}
+                            onChange={(e) =>
+                              handleFlagChange(e, index, flagIndex)
+                            }
                           />
                           <label htmlFor={`flag-${index}-${flagIndex}`}>
                             {flag}
@@ -455,11 +477,7 @@ const Modal = () => {
             <p onClick={() => setFormStep((formstep) => formstep - 1)}>Back</p>
           )}
           <button className={styles["discard-btn"]}>Discard changes</button>
-          {formstep < 5 && (
-            <button onClick={() => setFormStep((formstep) => formstep + 1)}>
-              Continue
-            </button>
-          )}
+          {formstep < 5 && <button onClick={handleContinue}>Continue</button>}
           {formstep === 5 && <button>Submit</button>}
         </div>
       </div>
