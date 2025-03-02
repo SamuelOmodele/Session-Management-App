@@ -35,7 +35,7 @@ const Page = () => {
       if (response) {
         // Assume storeTokens is defined elsewhere
         storeTokens(response.token, response.refresh_token);
-        router.push("/new-password");
+        router.push("/dashboard");
       } else {
         console.log("error during login: ", response);
       }

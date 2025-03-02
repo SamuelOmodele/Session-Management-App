@@ -100,7 +100,11 @@
 }
 .modal-footer button{
     width: fit-content;
-    padding: 10px 15px;
+    padding: 0px 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 14.5px;
     border-radius: 10px;
     background-color: #204E4C;
