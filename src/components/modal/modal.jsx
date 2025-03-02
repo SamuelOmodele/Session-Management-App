@@ -4,18 +4,17 @@ import styles from "./modal.module.css";
 import { IoAddOutline, IoClose } from "react-icons/io5";
 import { PiCopySimpleFill } from "react-icons/pi";
 import { FaCheck } from "react-icons/fa6";
-import { useDispatch } from 'react-redux';
-import { setIsModalOpen } from '@/redux/modalSlice';
+import { useDispatch } from "react-redux";
+import { setIsModalOpen } from "@/redux/modalSlice";
 import { BsCloudUpload } from "react-icons/bs";
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
-
 
 const Modal = () => {
   const [formstep, setFormStep] = useState(1);
 
   const [copied, setCopied] = useState(false);
-  const [enrollmentMethod, setEnrollmentMethod] = useState('file');
+  const [enrollmentMethod, setEnrollmentMethod] = useState("file");
 
   const link = "https://sessionmgtsite.com/session/s3201";
 
@@ -30,7 +29,7 @@ const Modal = () => {
     }
   };
 
-  const [languageIndex, setLanguageIndex] = useState('');
+  const [languageIndex, setLanguageIndex] = useState("");
 
   const dispatch = useDispatch();
   const closeModal = () => {
@@ -62,20 +61,20 @@ const Modal = () => {
 
   const [allowReviewReport, setAllowReviewReport] = useState(true);
   const [students, setStudents] = useState([]);
-  const [studentName, setStudentName] = useState('');
-  const [studentMatricNo, setStudentMatricNo] = useState('');
+  const [studentName, setStudentName] = useState("");
+  const [studentMatricNo, setStudentMatricNo] = useState("");
 
   const updateLanguage = (index) => {
     if (languageIndex) {
       if (languageIndex === index) {
-        setLanguageIndex('');
+        setLanguageIndex("");
       } else {
         setLanguageIndex(index);
       }
     } else {
-      setLanguageIndex(index)
+      setLanguageIndex(index);
     }
-  }
+  };
 
   // const handleFileUpload = (event) => {
   //   const file = event.target.files[0];
@@ -90,7 +89,6 @@ const Modal = () => {
   //     alert("Please upload a valid CSV file.");
   //     return;
   //   }
-
 
   //   const reader = new FileReader();
   //   reader.onload = ({ target }) => {
@@ -161,15 +159,15 @@ const Modal = () => {
     if (!studentName || !studentMatricNo) {
       return;
     }
-    setStudents(prevStudents => [
+    setStudents((prevStudents) => [
       ...prevStudents,
-      { matricNumber: studentMatricNo, fullName: studentName }
+      { matricNumber: studentMatricNo, fullName: studentName },
     ]);
 
     // Optionally clear input fields after adding
-    setStudentName('');
-    setStudentMatricNo('');
-  }
+    setStudentName("");
+    setStudentMatricNo("");
+  };
 
   return (
     <div className={styles["modal-page"]}>
@@ -215,19 +213,44 @@ const Modal = () => {
                 Content configuration{" "}
               </p>
             </div>
-            <div className={styles['menu']}>
-              <div className={styles['circle-no']} id={formstep >= 3 ? styles['active'] : styles['']}>{formstep > 3 ? <FaCheck /> : 3}</div>
-              <p className={formstep >= 3 ? styles['active-text'] : styles['inactive-text']}>Student enrollment</p>
+            <div className={styles["menu"]}>
+              <div
+                className={styles["circle-no"]}
+                id={formstep >= 3 ? styles["active"] : styles[""]}
+              >
+                {formstep > 3 ? <FaCheck /> : 3}
+              </div>
+              <p
+                className={
+                  formstep >= 3
+                    ? styles["active-text"]
+                    : styles["inactive-text"]
+                }
+              >
+                Student enrollment
+              </p>
             </div>
-            <div className={styles['menu']}>
-              <div className={styles['circle-no']} id={formstep >= 4 ? styles['active'] : styles['']}>{formstep > 4 ? <FaCheck /> : 4}</div>
-              <p className={formstep >= 4 ? styles['active-text'] : styles['inactive-text']}>Confirmation</p>
+            <div className={styles["menu"]}>
+              <div
+                className={styles["circle-no"]}
+                id={formstep >= 4 ? styles["active"] : styles[""]}
+              >
+                {formstep > 4 ? <FaCheck /> : 4}
+              </div>
+              <p
+                className={
+                  formstep >= 4
+                    ? styles["active-text"]
+                    : styles["inactive-text"]
+                }
+              >
+                Confirmation
+              </p>
             </div>
             {/* <div className={styles['menu']}>
               <div className={styles['circle-no']} id={formstep >= 5 ? styles['active'] : styles['']}>{formstep > 5 ? <FaCheck /> : 5}</div>
               <p className={formstep >= 5 ? styles['active-text'] : styles['inactive-text']}></p>
             </div> */}
-
           </div>
 
           <div className={styles["content"]}>
@@ -236,17 +259,57 @@ const Modal = () => {
               <div className={styles["content1"]}>
                 <div className={styles["group"]}>
                   <p>Select supported programming languages</p>
-                  <div className={languageIndex === 1 ? styles['active-language'] : styles['language']} onClick={() => updateLanguage(1)}>Python {languageIndex === 1 && <IoClose size={18} />} </div>
-                  <div className={languageIndex === 2 ? styles['active-language'] : styles['language']} onClick={() => updateLanguage(2)}>MySQL {languageIndex === 2 && <IoClose size={18} />} </div>
-                  <div className={languageIndex === 3 ? styles['active-language'] : styles['language']} onClick={() => updateLanguage(3)}>C# {languageIndex === 3 && <IoClose size={18} />} </div>
-                  <div className={languageIndex === 4 ? styles['active-language'] : styles['language']} onClick={() => updateLanguage(4)}>Matlab {languageIndex === 4 && <IoClose size={18} />} </div>
+                  <div
+                    className={
+                      languageIndex === 1
+                        ? styles["active-language"]
+                        : styles["language"]
+                    }
+                    onClick={() => updateLanguage(1)}
+                  >
+                    Python {languageIndex === 1 && <IoClose size={18} />}{" "}
+                  </div>
+                  <div
+                    className={
+                      languageIndex === 2
+                        ? styles["active-language"]
+                        : styles["language"]
+                    }
+                    onClick={() => updateLanguage(2)}
+                  >
+                    MySQL {languageIndex === 2 && <IoClose size={18} />}{" "}
+                  </div>
+                  <div
+                    className={
+                      languageIndex === 3
+                        ? styles["active-language"]
+                        : styles["language"]
+                    }
+                    onClick={() => updateLanguage(3)}
+                  >
+                    C# {languageIndex === 3 && <IoClose size={18} />}{" "}
+                  </div>
+                  <div
+                    className={
+                      languageIndex === 4
+                        ? styles["active-language"]
+                        : styles["language"]
+                    }
+                    onClick={() => updateLanguage(4)}
+                  >
+                    Matlab {languageIndex === 4 && <IoClose size={18} />}{" "}
+                  </div>
                 </div>
-                <div className={styles['group']}>
+                <div className={styles["group"]}>
                   <p>Language version</p>
-                  <input style={{ width: '100%' }} type="number" placeholder='Enter language version' />
+                  <input
+                    style={{ width: "100%" }}
+                    type="number"
+                    placeholder="Enter language version"
+                  />
                 </div>
 
-                <div className={styles['group']}>
+                <div className={styles["group"]}>
                   <p>When will this session start?</p>
                   <input
                     type="date"
@@ -427,50 +490,89 @@ const Modal = () => {
               </div>
             )}
 
-            {formstep === 3 &&
-              <div className={styles['content1']}>
-                <div className={styles['group']} style={{ marginBottom: '15px' }}>
+            {formstep === 3 && (
+              <div className={styles["content1"]}>
+                <div
+                  className={styles["group"]}
+                  style={{ marginBottom: "15px" }}
+                >
                   <p>Enrollment method</p>
-                  <select name="" id="" value={enrollmentMethod} style={{ width: '100%' }} onChange={(e) => { setEnrollmentMethod(e.target.value); setStudents([]) }}>
+                  <select
+                    name=""
+                    id=""
+                    value={enrollmentMethod}
+                    style={{ width: "100%" }}
+                    onChange={(e) => {
+                      setEnrollmentMethod(e.target.value);
+                      setStudents([]);
+                    }}
+                  >
                     <option value="file">Add student from file</option>
-                    <option value="direct" >Direct invitation</option>
+                    <option value="direct">Direct invitation</option>
                   </select>
                 </div>
 
                 {/* <div className={styles['link']}>
-                  <p>sessionmgtsite.com/session/s3201</p>
-                  <span onClick={handleCopy}>{copied ? "Copied!" : "Copy"} <PiCopySimpleFill /></span>
-                </div> */}
-                {enrollmentMethod === 'file' && <label htmlFor='file'>
-                  <div className={styles['upload-container']}>
-                    <BsCloudUpload className={styles['upload-icon']} />
-                    <p className={styles['text1']}>Click to upload</p>
-                    <p className={styles['text2']}>CSV or XLS file up to 10mb. Ensure columns are labelled 'Full Name' and 'Matric Number'</p>
-                    <input type="file" name="" id="file" accept=".csv,.xls,.xlsx" onChange={handleFileUpload} style={{ display: 'none' }} />
-                  </div>
-                </label>}
+      <p>sessionmgtsite.com/session/s3201</p>
+      <span onClick={handleCopy}>{copied ? "Copied!" : "Copy"} <PiCopySimpleFill /></span>
+    </div> */}
+                {enrollmentMethod === "file" && (
+                  <label htmlFor="file">
+                    <div className={styles["upload-container"]}>
+                      <BsCloudUpload className={styles["upload-icon"]} />
+                      <p className={styles["text1"]}>Click to upload</p>
+                      <p className={styles["text2"]}>
+                        CSV or XLS file up to 10mb. Ensure columns are labelled
+                        'Full Name' and 'Matric Number'
+                      </p>
+                      <input
+                        type="file"
+                        name=""
+                        id="file"
+                        accept=".csv,.xls,.xlsx"
+                        onChange={handleFileUpload}
+                        style={{ display: "none" }}
+                      />
+                    </div>
+                  </label>
+                )}
                 {console.log(students)}
 
-                {enrollmentMethod === 'direct' &&
-                  <div className={styles['group']}>
+                {enrollmentMethod === "direct" && (
+                  <div className={styles["group"]}>
                     <p>Student Information to invite</p>
-                    <input type="text" placeholder='Enter student full name' style={{ marginRight: '20px' }} value={studentName} onChange={(e) => setStudentName(e.target.value)} />
-                    <input type="text" placeholder='Enter student matric number' value={studentMatricNo} onChange={(e) => setStudentMatricNo(e.target.value)} />
-                    <button className={styles['add-student']} onClick={addStudent}>Add</button>
+                    <input
+                      type="text"
+                      placeholder="Enter student full name"
+                      style={{ marginRight: "20px" }}
+                      value={studentName}
+                      onChange={(e) => setStudentName(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Enter student matric number"
+                      value={studentMatricNo}
+                      onChange={(e) => setStudentMatricNo(e.target.value)}
+                    />
+                    <button
+                      className={styles["add-student"]}
+                      onClick={addStudent}
+                    >
+                      Add
+                    </button>
                   </div>
-                }
+                )}
 
-                <div className={styles['student-container']}>
-                  <h4 className={styles['student-head-text']}>Students</h4>
+                <div className={styles["student-container"]}>
+                  <h4 className={styles["student-head-text"]}>Students</h4>
                   {students?.map((student, index) => (
-                    <div key={index} className={styles['student-box']}>
+                    <div key={index} className={styles["student-box"]}>
                       <p>{student.fullName}</p>
                       <p>{student.matricNumber}</p>
                     </div>
-
                   ))}
                 </div>
-                <div className={styles['group']}>
+                <div className={styles["group"]}>
                   <p>When will invitation expire? (Optional)</p>
                   <input
                     type="number"
@@ -484,9 +586,12 @@ const Modal = () => {
               </div>
             )}
 
-            {formstep === 4 &&
-              <div className={styles['content1']}>
-                <div className={styles['group']} style={{ marginBottom: '15px' }}>
+            {formstep === 4 && (
+              <div className={styles["content1"]}>
+                <div
+                  className={styles["group"]}
+                  style={{ marginBottom: "15px" }}
+                >
                   <p>All set?</p>
                   <span>
                     Clicking the Submit button below confirms that all has been
