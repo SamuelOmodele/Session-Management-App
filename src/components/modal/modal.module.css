@@ -48,13 +48,13 @@
   width: 30%;
   border: 1px solid #f2f9f9;
 }
-.menu {
-  display: flex;
-  align-items: center;
-  margin: 30px 0 35px;
-  gap: 10px;
-  padding-left: 20px;
-  font-size: 15px;
+.menu{
+    display: flex;
+    align-items: center;
+    margin: 30px 0 40px;
+    gap: 10px;
+    padding-left: 20px;
+    font-size: 15px;
 }
 .circle-no {
   width: 35px;
@@ -158,19 +158,17 @@
   justify-content: center;
   gap: 5px;
 }
-.group input,
-.group select,
-.group textarea {
-  padding: 11px 20px;
-  border-radius: 7px;
-  border: 1.5px solid #eceded;
-  width: 45%;
-  display: inline-block;
-  appearance: none;
-  font-size: 15px;
-  font-family: "Aeonik";
-  outline: none;
-  resize: none;
+.group input, .group select, .group textarea{
+    padding: 11px 20px;
+    border-radius: 7px;
+    border: 1.5px solid #ECEDED;
+    width: calc((100% - 20px)/2);
+    display: inline-block;
+    appearance: none;
+    font-size: 15px;
+    font-family: 'Aeonik';
+    outline: none;
+    resize: none;
 }
 .group input:focus,
 .group select:focus,
@@ -273,4 +271,76 @@
   appearance: none;
   font-size: 15px;
   font-family: "Aeonik";
+}
+.group span{
+    color: #414141;
+    font-size: 14px;
+}
+.upload-container{
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-direction: column;
+    border: 1.5px dotted #969696;
+    border-radius: 10px;
+    margin: 15px 0 30px;
+    cursor: pointer;
+}
+.upload-container .text1{
+    font-weight: 500;
+    font-size: 15px;
+    color: #204E4C;
+}
+.upload-container .text1{
+    font-weight: 500;
+    font-size: 16px;
+    color: #204E4C;
+}
+.upload-container .text2{
+    font-weight: 400;
+    font-size: 14px;
+    color: #AAB2CC;
+    margin-top: 5px;
+    text-align: center;
+}
+.upload-icon{
+    font-size: 26px;
+    color: #333;
+}
+button.add-student{
+    background-color: #204E4C;
+    color: white;
+    font-size: 14px;
+    padding: 7px 17px;
+    border-radius: 5px;
+    border: none;
+    margin-top: 10px;
+    width: fit-content;
+    display: block;
+    margin-left: auto;
+    /* float: right; */
+}
+.student-container{
+    margin-top: -10px;
+    margin-bottom: 20px;
+    /* background-color: red; */
+}
+.student-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f6f6f6;
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.student-head-text{
+    font-weight: 500;
+    color: #333;
+    font-size: 17px;
+    margin-bottom: 10px;
 }
