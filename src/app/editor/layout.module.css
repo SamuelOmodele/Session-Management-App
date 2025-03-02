@@ -1,0 +1,9 @@
+.layout {
+  display: flex;
+  background-color: #f5f7fa;
+  position: relative;
+  overflow-y: hidden;
+}
+.children-container {
+  flex: 2;
+}

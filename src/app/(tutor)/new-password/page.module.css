@@ -1,47 +1,70 @@
 .auth-container {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
 }
 .logo-container {
-  width: 100%;
-  height: 80px;
   display: flex;
+  justify-content: center;
   align-items: center;
+  height: 80px;
+  width: 100%;
+  margin: 0 auto;
+  /* background: $grey200; */
 }
 .logo {
-  background-color: #204e4c;
-  color: white;
-  font-size: 15px;
+  color: #204e4c;
+  font-size: 18px;
+  font-weight: bold;
   border-radius: 13px;
   width: 100%;
   max-width: 227px;
   text-align: center;
   height: 48px;
   line-height: 47px;
-  position: absolute;
-  top: 180px;
-  left: 100px;
 }
 .form-container {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  padding: 80px 140px 144px 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+
+  /* display: 'flex',
+  flexDirection: 'column',
+  minHeight: '100vh',
+  width: '100vw',
+  background: '$grey200',
+  ai: 'center',
+  jc: 'center', */
+}
+.form-content {
+  width: 85%;
+  max-width: 1200px;
+  /* height: 100vh; */
+  max-height: 740px;
+  margin: 80px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 50px 30px;
+  border-radius: 16px;
   gap: 48px;
-  background-color: #ffffff;
 }
-.form-header h3 {
-  font-size: 36px;
-}
-.form-header p {
-  font-size: 16px;
+
+.form-header {
+  text-align: center;
+  /* max-width: 350px;
+  align-items: center; */
 }
 .form-body {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   gap: 24px;
 }
 .form-input {
@@ -79,13 +102,14 @@
   cursor: pointer;
 }
 .form-body button {
-  margin-top: 20px;
+  margin: 20px auto 0;
   /* background-color: #0e0e0e; */
   background-color: #204e4c;
   color: #fff;
   font-size: 14px;
   padding: 8px 24px;
-  width: 100%;
+  /* width: 100%; */
+  width: 30%;
   justify-content: center;
   border-radius: 8px;
   cursor: pointer;

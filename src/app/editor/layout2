@@ -1,0 +1,110 @@
+<DashboardContainer>
+        <Header>
+          <SidebarToggle onClick={toggleSidebar}>
+            {showSidebar ? <X /> : <Menu />}
+          </SidebarToggle>
+          <h1>mercury</h1>
+
+          <Links>
+            <Link href='/dashboard/activity'>
+              <Bell />
+            </Link>
+            <Link href='/dashboard/settings'>
+              <User className='user' />
+            </Link>
+          </Links>
+        </Header>
+
+        <div>
+          <Sidebar active={showSidebar} />
+          <Content>{children}</Content>
+        </div>
+</DashboardContainer>
+
+      const SidebarToggle = styled('button', {
+        all: 'unset',
+        cursor: 'pointer',
+        display: 'none',
+      
+        '@bp3': {
+          display: 'block',
+        },
+      });
+      
+      const Header = styled('nav', {
+        height: '64px',
+        borderBottom: '1px solid #E0E0E0',
+        paddingLeft: '$4',
+        paddingRight: '36px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+      
+        '& h1': {
+          fontSize: '28px',
+          color: '$black100',
+          fontWeight: '500',
+          letterSpacing: '-0.03em',
+        },
+      
+        '@bp3': {
+          padding: '$4',
+        },
+      });
+      
+      const Links = styled('div', {
+        display: 'flex',
+        gap: '$3',
+        flexDirection: 'row',
+      
+        '& svg': {
+          width: '36px',
+          padding: '8px',
+          height: '36px',
+          borderRadius: '50%',
+      
+          '&.user': {
+            background: '#FFEFE7',
+      
+            '@bp3': {
+              display: 'none',
+            },
+          },
+        },
+      
+        '@bp3': {
+          flexDirection: 'row-reverse',
+      
+          '&.user': {
+            display: 'none',
+          },
+        },
+      });
+      
+      const DashboardContainer = styled('div', {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100vh',
+        width: '100vw',
+      
+        '> div': {
+          display: 'flex',
+          flexDirection: 'row',
+          position: 'relative',
+        },
+      
+        '@bp3': {
+          flexDirection: 'column',
+        },
+      });
+      
+      const Content = styled('main', {
+        width: '100%',
+        padding: '36px',
+        height: 'calc(100vh - 64px)',
+        overflowY: 'scroll',
+      
+        '@bp3': {
+          padding: '$5 $4',
+        },
+      });
