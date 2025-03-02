@@ -50,6 +50,17 @@ const Sidebar = () => {
         >
           <SlScreenDesktop className={styles["icon"]} /> All Sessions
         </div>
+        <div
+          className={styles["menu-item"]}
+          id={
+            activeSidebarMenu === "language-images"
+              ? styles["active"]
+              : styles[""]
+          }
+          onClick={() => handleClick("/dashboard/language-images")}
+        >
+          <SlScreenDesktop className={styles["icon"]} /> Language
+        </div>
         <div className={styles["menu-item"]}>
           <HiOutlineUserGroup className={styles["icon"]} /> All Students
         </div>
