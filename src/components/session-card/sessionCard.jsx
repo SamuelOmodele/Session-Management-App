@@ -43,11 +43,11 @@ const SessionCard = ({ title, description, start_duration, end_duration, student
                     <div>D</div>
                     <div>Q</div>
                     <div>A</div>
-                    {(students.length - 3) > 0 && <div>+{students.length - 3}</div>}
+                    {(students?.length - 3) > 0 && <div>+{students?.length - 3}</div>}
                 </div>
 
                 <div className={styles['user-list']}>
-                    <PiUserListBold size={18} /> {students.length}
+                    <PiUserListBold size={18} /> {students?.length}
                 </div>
             </div>
         </div>
