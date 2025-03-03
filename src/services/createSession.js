@@ -71,3 +71,46 @@ export const updateSession = async (session_id, session_link) => {
         return {status: false, message: error.message};;
     }
 };
+
+export const fetchAllSession = async () => {
+    const token = getAccessToken();
+    try {
+        const res = await axiosInstance.get(`web/session_manager`,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
+        );
+
+        if (!res.data.status) {
+            console.log("Failed to fetch sessions", res.data.message);
+            return {status: false, message: res.data.message};;
+        }
+
+        return {status: true, message: res.data.payload.data};
+
+    } catch (error) {
+        console.log("Error fetching sessions:", error);
+        return {status: false, message: error.message};
+    }
+};
+export const fetchSingleSession = async (id) => {
+    const token = getAccessToken();
+    try {
+        const res = await axiosInstance.get(`web/session_manager/${id}`,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
+        );
+
+        if (!res.data.status) {
+            console.log("Failed to fetch session", res.data.message);
+            return {status: false, message: res.data.message};;
+        }
+
+        return {status: true, message: res.data.payload.data};
+
+    } catch (error) {
+        console.log("Error fetching sessions:", error);
+        return {status: false, message: error.message};
+    }
+};

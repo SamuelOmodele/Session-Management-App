@@ -13,8 +13,46 @@ import { PiClock } from "react-icons/pi";
 import { PiClockCountdown } from "react-icons/pi";
 import { useDispatch } from 'react-redux';
 import { setActiveMenu } from '@/redux/sidebarSlice';
+import { fetchSingleSession } from '@/services/createSession';
+import { useParams } from 'next/navigation';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Page = () => {
+
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(null);
+
+    const params = useParams();
+    const { id } = params;
+    // console.log(id)
+
+    useEffect(() => {
+        fetchCurrentSession();
+    }, []);
+
+    const fetchCurrentSession = async () => {
+        try {
+            setLoading(true);
+
+            const response = await fetchSingleSession({id: id});
+            console.log('response', response);
+            if (response.status) {
+                setData(response.message);
+                toast.success('Session Fetched Successfully');
+                setLoading(false);
+                return;
+            } else {
+                toast.error('Error fetching session');
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error(error.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
 
     const invitations = [
         { icon: 'PB', name: 'Peculiar Badejo', email: 'peculiarbadejoemailaddress@gmail.com', date: 'Feb 6, 11:43 AM' },
@@ -80,6 +118,7 @@ const Page = () => {
                         <div className={styles['code']}><FaCode /></div>
                         <h3>Mobile App Development Workshop - CSC412</h3>
                         <p>Created on January 28, 2025</p>
+                        <ToastContainer />
                     </div>
                     <div className={styles['body-container']}>
                         <p>1. Develop a To-Do List web application using React for the frontend, PHP for the backend, and MySQL for the database. The application should allow users to add, complete, and delete tasks. Implement state management in React to handle the list of tasks dynamically, create a PHP API to manage CRUD operations, and store tasks in a MySQL database to ensure persistence across sessions.</p>
