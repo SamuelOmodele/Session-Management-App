@@ -10,7 +10,6 @@ import Papa from "papaparse";
 import * as XLSX from "xlsx";
 import { toast, ToastContainer } from "react-toastify";
 import { createSession } from '@/services/createSession';
-import Loader from '../loader/loader';
 import Spinner from '../spinner/spinner';
 
 
