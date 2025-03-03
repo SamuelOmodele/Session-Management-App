@@ -40,7 +40,9 @@ export const createSession = async ({ sessionData }) => {
 };
 
 const constructInvitationUrl = (fid, hid, tid) => {
-    let link = `http://localhost:3000/editor?fid=${fid}&hid=${hid}&tid=${tid}`;
+    let origin_url = typeof window !== "undefined" ? window.location.origin : "";
+    console.log(origin_url);
+    let link = `${origin_url}/editor?fid=${fid}&hid=${hid}&tid=${tid}`;
     console.log(link);
     return link;
 }
