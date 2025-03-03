@@ -26,7 +26,15 @@
     font-size: 16.5px;
     margin-bottom: 10px;
     cursor: pointer;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
+
 .session-card h3:hover{
     text-decoration: underline;
 }
@@ -99,6 +107,10 @@
 #ongoing{
     background-color: #FFF4D5;
     color: #DCA70D;
+}
+#ongoing{
+    background-color: #F1F5FF;
+    color: #115FFC;
 }
 #completed{
     background-color: #C7FFD4;
