@@ -4,6 +4,7 @@ import React from 'react'
 import styles from './layout.module.css'
 import Modal from '@/components/modal/modal'
 import { useSelector } from 'react-redux'
+import CreateSessionModal from '@/components/createSessionModal/createSessionModal'
 
 const Layout = ({ children }) => {
 
@@ -12,7 +13,7 @@ const Layout = ({ children }) => {
   return (
       <div className={styles['layout']}>
         {modalState && <div className={styles['modal-overlay']}>
-          <Modal />
+          <CreateSessionModal />
         </div>}
         <div className={styles['sidebar-container']}>
           <Sidebar />
