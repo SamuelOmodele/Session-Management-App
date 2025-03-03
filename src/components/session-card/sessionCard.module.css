@@ -30,9 +30,30 @@
 .session-card h3:hover{
     text-decoration: underline;
 }
-.session-card p{
+/* .session-card p{
     font-weight: 400;
     font-size: 13px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
+.session-card p {
+    font-weight: 400;
+    font-size: 13px;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
 }
 .bottom-section{
     display: flex;
