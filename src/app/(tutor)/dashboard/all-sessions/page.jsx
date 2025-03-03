@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from 'react'
 import styles from './page.module.css'
-import Navbar from '@/components/navbar/navbar'
+import Navbar from '@/components/session-card/navbar/navbar'
 import SessionCard from '@/components/session-card/sessionCard'
 import { CgSearch } from "react-icons/cg";
 import { useDispatch } from 'react-redux'
