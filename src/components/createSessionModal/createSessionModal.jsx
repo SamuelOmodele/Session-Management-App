@@ -35,10 +35,8 @@ const CreateSessionModal = () => {
             id: questions.length + 1,
             question: "",
             instruction: "",
-            total_score: "",
-            score_percentage: "",
-            input_data: "",
-            expected_output: ""
+            test_cases: [],
+            flags: [],
         }]);
     };
 
@@ -119,34 +117,34 @@ const CreateSessionModal = () => {
         // const BASE_URL = typeof window !== "undefined" ? window.location.origin : "";
         // console.log(BASE_URL);
         if (formstep === 1) {
-            if (!languageIndex) {
-                toast.error('Select a language');
-                return;
-            }
-            if (!version) {
-                toast.error('language version is required');
-                return;
-            }
-            if (!sessionStartDate) {
-                toast.error('Session start date is required');
-                return;
-            }
-            if (!sessionStartTime) {
-                toast.error('Session start time is required');
-                return;
-            }
-            if (!sessionEndDate) {
-                toast.error('Session end date is required');
-                return;
-            }
-            if (!sessionEndTime) {
-                toast.error('Session end time is required');
-                return;
-            }
-            if (!sessionName) {
-                toast.error('Session name is requied');
-                return;
-            }
+            // if (!languageIndex) {
+            //     toast.error('Select a language');
+            //     return;
+            // }
+            // if (!version) {
+            //     toast.error('language version is required');
+            //     return;
+            // }
+            // if (!sessionStartDate) {
+            //     toast.error('Session start date is required');
+            //     return;
+            // }
+            // if (!sessionStartTime) {
+            //     toast.error('Session start time is required');
+            //     return;
+            // }
+            // if (!sessionEndDate) {
+            //     toast.error('Session end date is required');
+            //     return;
+            // }
+            // if (!sessionEndTime) {
+            //     toast.error('Session end time is required');
+            //     return;
+            // }
+            // if (!sessionName) {
+            //     toast.error('Session name is requied');
+            //     return;
+            // }
             setFormStep(formstep => formstep + 1);
         } else if (formstep === 2) {
             setFormStep(formstep => formstep + 1);
@@ -168,7 +166,10 @@ const CreateSessionModal = () => {
         console.log(`${sessionEndDate} ${sessionEndTime}:00`);
         console.log(sessionName)
         console.log(allowReviewReport ? 'yes' : 'no')
-        console.log(questions.map(({ id, ...rest }) => rest))
+        console.log(questions.map(({ id, ...rest }) => rest));
+        // questions.map((question, index) => {
+        //     console.log(transformCheckFlags(question.checkFlags));
+        // })
         console.log(students)
         console.log(invitationExpiryDuration)
         // toast.success("Session created successfully!");
@@ -209,6 +210,79 @@ const CreateSessionModal = () => {
         }
     }
 
+    // const transformCheckFlags = (checkFlags) =>
+    //     checkFlags.map(flag => {
+    //         const key = Object.keys(flag)[0];
+    //         return { name: key.toLowerCase(), value: flag[key].toString() };
+    //     });
+
+
+    // Add a new test case
+    const addTestCase = (qIndex) => {
+        const updatedQuestions = [...questions];
+        updatedQuestions[qIndex].test_cases.push({ input_data: "", expected_outcome: "", total_weight: 0 });
+        setQuestions(updatedQuestions);
+    };
+
+    // Update test case details
+    const updateTestCase = (qIndex, tIndex, key, value) => {
+        const updatedQuestions = [...questions];
+        updatedQuestions[qIndex].test_cases[tIndex][key] = value;
+        setQuestions(updatedQuestions);
+    };
+
+    // Handle check flag toggle and weight update
+    // const handleCheckFlag = (qIndex, flag, weight) => {
+    //     const updatedQuestions = [...questions];
+    //     let flagIndex = updatedQuestions[qIndex].checkFlags.findIndex((f) => Object.keys(f)[0] === flag);
+
+    //     if (weight === "" || weight === 0) {
+    //         updatedQuestions[qIndex].checkFlags = updatedQuestions[qIndex].checkFlags.filter((f) => Object.keys(f)[0] !== flag);
+    //     } else if (flagIndex === -1) {
+    //         updatedQuestions[qIndex].checkFlags.push({ [flag]: parseInt(weight) });
+    //     } else {
+    //         updatedQuestions[qIndex].checkFlags[flagIndex][flag] = parseInt(weight);
+    //     }
+
+    //     setQuestions(updatedQuestions);
+    // };
+
+    // const handleCheckFlag = (qIndex, flag, weight) => {
+    //     const updatedQuestions = [...questions];
+    //     let flagIndex = updatedQuestions[qIndex].flags.findIndex((f) => f.name === flag);
+
+    //     if (weight === "" || weight === 0) {
+    //         // Remove the flag if weight is empty or 0
+    //         updatedQuestions[qIndex].flags = updatedQuestions[qIndex].flags.filter((f) => f.name !== flag);
+    //     } else if (flagIndex === -1) {
+    //         // Add new flag in required format
+    //         updatedQuestions[qIndex].flags.push({ name: flag, value: parseInt(weight) });
+    //     } else {
+    //         // Update existing flag weight
+    //         updatedQuestions[qIndex].flags[flagIndex].value = parseInt(weight);
+    //     }
+
+    //     setQuestions(updatedQuestions);
+    // };
+
+    const handleCheckFlag = (qIndex, flag, weight) => {
+        const updatedQuestions = [...questions];
+        let flagIndex = updatedQuestions[qIndex].flags.findIndex((f) => f.name === flag);
+
+        if (weight === "" || weight === "0") {
+            // Remove the flag if weight is empty or "0"
+            updatedQuestions[qIndex].flags = updatedQuestions[qIndex].flags.filter((f) => f.name !== flag);
+        } else if (flagIndex === -1) {
+            // Add new flag with value as a string
+            updatedQuestions[qIndex].flags.push({ name: flag, value: weight.toString() });
+        } else {
+            // Update existing flag weight as a string
+            updatedQuestions[qIndex].flags[flagIndex].value = weight.toString();
+        }
+
+        setQuestions(updatedQuestions);
+    };
+
     // --- form interaction states ---
     const [formstep, setFormStep] = useState(1);
     const [enrollmentMethod, setEnrollmentMethod] = useState('file');
@@ -220,10 +294,8 @@ const CreateSessionModal = () => {
             id: 1,
             question: "",
             instruction: "",
-            total_score: "",
-            score_percentage: "",
-            input_data: "",
-            expected_output: ""
+            test_cases: [],
+            flags: [],
         }
     ]);
     const [allowReviewReport, setAllowReviewReport] = useState(true);
@@ -239,6 +311,8 @@ const CreateSessionModal = () => {
     const [sessionEndTime, setSessionEndTime] = useState('');
     const [sessionName, setSessionName] = useState('');
     const [invitationExpiryDuration, setInvitationExpiryDuration] = useState(0);
+    const checkFlagOptions = ["Coding style", "Correctness", "Successful execution", "Successful compilation"];
+
 
     return (
         <div className={styles['modal-page']}>
@@ -321,25 +395,77 @@ const CreateSessionModal = () => {
                                             <p>Instruction for question {question.id} (if any)</p>
                                             <textarea name="" id="" placeholder='Enter Instruction' style={{ width: '100%' }} value={question.instruction} onChange={(e) => handleInputChange(question.id, "instruction", e.target.value)} rows={7}></textarea>
                                         </div>
-                                        {/* <div className={styles['attach']}>
-                      <input type="checkbox" style={{ Width: '10px' }} name="" id="" />
-                      <p>Attach this instruction for all questions</p>
-                    </div> */}
-                                        <div className={styles['group']}>
-                                            <p>Set question {question.id} value</p>
-                                            <input type="text" placeholder='Enter total score/weight' style={{ marginRight: '20px' }} value={question.total_score} onChange={(e) => handleInputChange(question.id, "total_score", e.target.value)} />
-                                            <input type="text" name="" id="" placeholder='Enter score percentage' value={question.score_percentage} onChange={(e) => handleInputChange(question.id, "score_percentage", e.target.value)} />
-                                        </div>
-                                        <div className={styles['group']}>
-                                            <p>Input data for question {question.id}</p>
-                                            <textarea name="" id="" placeholder='Enter Input data or link' style={{ width: '100%' }} rows={7} value={question.input_data} onChange={(e) => handleInputChange(question.id, "input_data", e.target.value)}></textarea>
-                                        </div>
-                                        <div className={styles['group']}>
-                                            <p>Expected output for question {question.id}</p>
-                                            <textarea name="" id="" placeholder='Enter Expected output' style={{ width: '100%' }} rows={7} value={question.expected_output} onChange={(e) => handleInputChange(question.id, "expected_output", e.target.value)}></textarea>
+                                        <>
+                                            {question.test_cases.map((testcase, index) => (
+                                                <div className={styles['test-cases']} key={index}>
+                                                    <h3>Test case {index + 1}</h3>
+                                                    <div className={styles['group']}>
+                                                        <p>Input data</p>
+                                                        <input type="text" placeholder='Enter input data' style={{ width: '100%' }} value={testcase.input_data} onChange={(e) => updateTestCase(question.id - 1, index, 'input_data', e.target.value)} />
+                                                    </div>
+                                                    <div className={styles['group']}>
+                                                        <p>Expected Outcome</p>
+                                                        <input type="text" placeholder='Enter expected outcome' style={{ width: '100%' }} value={testcase.expected_outcome} onChange={(e) => updateTestCase(question.id - 1, index, 'expected_outcome', e.target.value)} />
+                                                    </div>
+                                                    <div className={styles['group']}>
+                                                        <p>Set test case weight</p>
+                                                        <input type="text" placeholder='Enter weight' style={{ width: '50%' }} value={testcase.total_weight} onChange={(e) => updateTestCase(question.id - 1, index, 'total_weight', e.target.value)} />
+                                                    </div>
+                                                </div>
+                                            ))}
+                                            <div className={styles['add']} onClick={() => addTestCase(question.id - 1)}>
+                                                <IoAddOutline size={22} />
+                                                <p> Add test case</p>
+                                            </div>
+                                        </>
+                                        {/* <div className={styles['flag-container']}>
+                                            <h3>Check flags</h3>
+                                            {checkFlagOptions.map((flag) => {
+                                                const existingFlag = question.flags.find((f) => f.name === flag);
+                                                return (
+                                                    <div className={styles['flags']} key={flag}>
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={!!existingFlag}
+                                                            onChange={(e) => handleCheckFlag(question.id - 1, flag, e.target.checked ? 10 : "")}
+                                                        />
+                                                        <p>{flag}</p>
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Enter weight"
+                                                            value={existingFlag ? existingFlag.value : ""}
+                                                            onChange={(e) => handleCheckFlag(question.id - 1, flag, e.target.value)}
+                                                        />
+                                                    </div>
+                                                );
+                                            })}
+                                        </div> */}
+
+                                        <div className={styles['flag-container']}>
+                                            <h3>Check flags</h3>
+                                            {checkFlagOptions.map((flag) => {
+                                                const existingFlag = question.flags.find((f) => f.name === flag);
+                                                return (
+                                                    <div className={styles['flags']} key={flag}>
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={!!existingFlag}
+                                                            onChange={(e) => handleCheckFlag(question.id - 1, flag, e.target.checked ? "10" : "")}  // Ensure "10" is a string
+                                                        />
+                                                        <p>{flag}</p>
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Enter weight"
+                                                            value={existingFlag ? existingFlag.value : ""}
+                                                            onChange={(e) => handleCheckFlag(question.id - 1, flag, e.target.value)}  // No need to convert to number
+                                                        />
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 ))}
+
                                 <div className={styles['allow']}>
                                     <p>Allow students to get review report after grading</p>
                                     <div className={styles['toggle-container']} style={{ backgroundColor: allowReviewReport ? '' : '#969696', cursor: 'pointer' }} onClick={() => setAllowReviewReport(value => !value)}>
@@ -361,11 +487,6 @@ const CreateSessionModal = () => {
                                         <option value="direct" >Direct invitation</option>
                                     </select>
                                 </div>
-
-                                {/* <div className={styles['link']}>
-                  <p>sessionmgtsite.com/session/s3201</p>
-                  <span onClick={handleCopy}>{copied ? "Copied!" : "Copy"} <PiCopySimpleFill /></span>
-                </div> */}
                                 {enrollmentMethod === 'file' && <label htmlFor='file'>
                                     <div className={styles['upload-container']}>
                                         <BsCloudUpload className={styles['upload-icon']} />
@@ -417,10 +538,8 @@ const CreateSessionModal = () => {
 
                 <div className={styles['modal-footer']}>
                     {formstep > 1 && <p onClick={() => setFormStep(formstep => formstep - 1)}>Back</p>}
-                    {/* {loading && <p>Loading . . .</p>} */}
                     <button className={styles['discard-btn']}>Discard changes</button>
                     {formstep < 4 && <button onClick={validateForm}>Continue</button>}
-                    {/* {formstep < 4 && <button onClick={() => setFormStep(formstep => formstep + 1)}>Continue</button>} */}
                     {formstep === 4 && <button onClick={displayFormData}>{loading ? <Spinner size={22} color={'white'} /> : 'Submit'}</button>}
                 </div>
             </div>

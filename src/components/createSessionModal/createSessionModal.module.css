@@ -131,6 +131,7 @@
 .group > p{
     margin-bottom: 15px;
 }
+
 .language{
     border: 1px solid #ECEDED;
     padding: 7px 15px;
@@ -159,6 +160,7 @@
     justify-content: center;
     gap: 5px;
 }
+
 .group input, .group select, .group textarea{
     padding: 11px 20px;
     border-radius: 7px;
@@ -172,6 +174,49 @@
     resize: none;
 }
 .group input:focus, .group select:focus, .group textarea:focus{
+    border: 1.5px solid #204E4C;
+}
+.test-cases{
+    margin: 15px 0;
+}
+.test-cases > h3{
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.flag-container{
+    margin: 30px 0 10px;
+    /* background-color: red; */
+}
+.flag-container > h3{
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.flags {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    width: 100%;
+}
+.flags > p{
+    margin-right: 10px;
+}
+.flags input[type = 'text'], .flags input[type = 'number']{
+    padding: 11px 20px;
+    border-radius: 7px;
+    border: 1.5px solid #ECEDED;
+    width: calc((100% - 20px)/2);
+    display: inline-block;
+    appearance: none;
+    font-size: 15px;
+    font-family: 'Aeonik';
+    outline: none;
+    resize: none;
+}
+.flags input[type = 'text']:focus, .flags input[type = 'number']:focus{
     border: 1.5px solid #204E4C;
 }
 .attach, .allow{
