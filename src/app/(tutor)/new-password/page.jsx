@@ -37,14 +37,18 @@ const NewPasswordPage = () => {
       });
 
       if (response) {
-        storeTokens(response.access_token, response.refresh_token);
+        // storeTokens(response.access_token, response.refresh_token);
         console.log("User authentication updated successfully:", response);
+        console.log(response);
+
         router.push("/dashboard");
       }
     } catch (error) {
       console.log("error during reset password", error);
     }
   });
+
+  console.log("errors", errors);
 
   return (
     <div className={styles["auth-container"]}>
@@ -76,7 +80,7 @@ const NewPasswordPage = () => {
                 name="currentPassword"
                 id="currentPassword"
                 autoComplete="current-password"
-                {...register("currentPassword", {
+                {...register("current_password", {
                   required: "Password is required",
                 })}
               />
@@ -96,7 +100,7 @@ const NewPasswordPage = () => {
                 name="newPassword"
                 id="newPassword"
                 autoComplete="new-password"
-                {...register("newPassword", {
+                {...register("password", {
                   required: "Password is required",
                 })}
               />
@@ -113,10 +117,10 @@ const NewPasswordPage = () => {
                 type={showPassword ? "text" : "password"}
                 name="confirmPassword"
                 id="confirmPassword"
-                {...register("confirmPassword", {
+                {...register("confirm_password", {
                   required: "Confirm Password is required",
                   validate: (value) =>
-                    value === watch("newPassword") || "Passwords do not match",
+                    value === watch("password") || "Passwords do not match",
                 })}
               />
               {errors.confirmPassword && (
@@ -128,7 +132,7 @@ const NewPasswordPage = () => {
                 <FaRegEyeSlash onClick={togglePasswordVisibility} />
               )}
             </div>
-            <button>Change Password</button>
+            <button>Change</button>
           </form>
         </div>
       </div>

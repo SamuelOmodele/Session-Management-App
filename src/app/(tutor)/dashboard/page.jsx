@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import Navbar from "@/components/navbar/navbar";
 import StatCard from "@/components/statistic-card/statCard";
 import SessionCard from "@/components/session-card/sessionCard";
+import Loader from "@/components/Loader/loader";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveMenu } from "@/redux/sidebarSlice";
 import { fetchProfile } from "@/services/login";
@@ -20,6 +21,7 @@ const Dashboard = () => {
   }, [dispatch]);
 
   if (profile.loading) {
+    return <Loader loading={profile.loading} />;
     return <div>Loading...</div>;
   }
 

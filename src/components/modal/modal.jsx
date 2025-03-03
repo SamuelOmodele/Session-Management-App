@@ -1,17 +1,16 @@
-'use client'
-import React, { useState } from 'react'
-import styles from './modal.module.css'
+"use client";
+import React, { useState } from "react";
+import styles from "./modal.module.css";
 import { IoAddOutline, IoClose } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
-import { useDispatch } from 'react-redux';
-import { setIsModalOpen } from '@/redux/modalSlice';
+import { useDispatch } from "react-redux";
+import { setIsModalOpen } from "@/redux/modalSlice";
 import { BsCloudUpload } from "react-icons/bs";
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
 import { toast, ToastContainer } from "react-toastify";
 import { createSession } from '@/services/createSession';
 import Loader from '../loader/loader';
-
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ const Modal = () => {
   // -- functions ---
   const closeModal = () => {
     dispatch(setIsModalOpen(false));
-  }
+  };
 
   const handleInputChange = (id, field, value) => {
     setQuestions((prevQuestions) =>
@@ -45,14 +44,14 @@ const Modal = () => {
   const changeLanguage = (index) => {
     if (languageIndex) {
       if (languageIndex === index) {
-        setLanguageIndex('');
+        setLanguageIndex("");
       } else {
         setLanguageIndex(index);
       }
     } else {
-      setLanguageIndex(index)
+      setLanguageIndex(index);
     }
-  }
+  };
 
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -105,15 +104,15 @@ const Modal = () => {
     if (!studentName || !studentMatricNo) {
       return;
     }
-    setStudents(prevStudents => [
+    setStudents((prevStudents) => [
       ...prevStudents,
       { matric_number: studentMatricNo, fullname: studentName }
     ]);
 
     // Optionally clear input fields after adding
-    setStudentName('');
-    setStudentMatricNo('');
-  }
+    setStudentName("");
+    setStudentMatricNo("");
+  };
 
   const validateForm = () => {
     // const BASE_URL = typeof window !== "undefined" ? window.location.origin : "";
@@ -247,66 +246,117 @@ const Modal = () => {
       <div className={styles['modal-container']}>
         <div className={styles['modal-head']}>
           <h3>Create Session</h3>
-          <IoClose onClick={closeModal} className={styles['close-icon']} />
+          <IoClose onClick={closeModal} className={styles["close-icon"]} />
         </div>
-        <div className={styles['modal-body']}>
-
+        <div className={styles["modal-body"]}>
           {/* --- SIDEBAR --- */}
-          <div className={styles['sidebar']}>
-            <div className={styles['menu']}>
-              <div className={styles['circle-no']} id={formstep >= 1 ? styles['active'] : styles['']}>{formstep > 1 ? <FaCheck /> : 1}</div>
-              <p className={formstep >= 1 ? styles['active-text'] : styles['inactive-text']}>Session Initialization</p>
+          <div className={styles["sidebar"]}>
+            <div className={styles["menu"]}>
+              <div
+                className={styles["circle-no"]}
+                id={formstep >= 1 ? styles["active"] : styles[""]}
+              >
+                {formstep > 1 ? <FaCheck /> : 1}
+              </div>
+              <p
+                className={
+                  formstep >= 1
+                    ? styles["active-text"]
+                    : styles["inactive-text"]
+                }
+              >
+                Session Initialization
+              </p>
             </div>
-            <div className={styles['menu']}>
-              <div className={styles['circle-no']} id={formstep >= 2 ? styles['active'] : styles['']}>{formstep > 2 ? <FaCheck /> : 2}</div>
-              <p className={formstep >= 2 ? styles['active-text'] : styles['inactive-text']}>Content configuration </p>
+            <div className={styles["menu"]}>
+              <div
+                className={styles["circle-no"]}
+                id={formstep >= 2 ? styles["active"] : styles[""]}
+              >
+                {formstep > 2 ? <FaCheck /> : 2}
+              </div>
+              <p
+                className={
+                  formstep >= 2
+                    ? styles["active-text"]
+                    : styles["inactive-text"]
+                }
+              >
+                Content configuration{" "}
+              </p>
             </div>
-            <div className={styles['menu']}>
-              <div className={styles['circle-no']} id={formstep >= 3 ? styles['active'] : styles['']}>{formstep > 3 ? <FaCheck /> : 3}</div>
-              <p className={formstep >= 3 ? styles['active-text'] : styles['inactive-text']}>Student enrollment</p>
+            <div className={styles["menu"]}>
+              <div
+                className={styles["circle-no"]}
+                id={formstep >= 3 ? styles["active"] : styles[""]}
+              >
+                {formstep > 3 ? <FaCheck /> : 3}
+              </div>
+              <p
+                className={
+                  formstep >= 3
+                    ? styles["active-text"]
+                    : styles["inactive-text"]
+                }
+              >
+                Student enrollment
+              </p>
             </div>
-            <div className={styles['menu']}>
-              <div className={styles['circle-no']} id={formstep >= 4 ? styles['active'] : styles['']}>{formstep > 4 ? <FaCheck /> : 4}</div>
-              <p className={formstep >= 4 ? styles['active-text'] : styles['inactive-text']}>Confirmation</p>
+            <div className={styles["menu"]}>
+              <div
+                className={styles["circle-no"]}
+                id={formstep >= 4 ? styles["active"] : styles[""]}
+              >
+                {formstep > 4 ? <FaCheck /> : 4}
+              </div>
+              <p
+                className={
+                  formstep >= 4
+                    ? styles["active-text"]
+                    : styles["inactive-text"]
+                }
+              >
+                Confirmation
+              </p>
             </div>
             {/* <div className={styles['menu']}>
               <div className={styles['circle-no']} id={formstep >= 5 ? styles['active'] : styles['']}>{formstep > 5 ? <FaCheck /> : 5}</div>
               <p className={formstep >= 5 ? styles['active-text'] : styles['inactive-text']}></p>
             </div> */}
-
           </div>
 
-          <div className={styles['content']}>
+          <div className={styles["content"]}>
             {/* --- STEP 1 -- */}
-            {formstep === 1 &&
-              <div className={styles['content1']}>
-                <div className={styles['group']}>
+            {formstep === 1 && (
+              <div className={styles["content1"]}>
+                <div className={styles["group"]}>
                   <p>Select supported programming languages</p>
                   <div className={languageIndex === 1 ? styles['active-language'] : styles['language']} onClick={() => changeLanguage(1)}>Python {languageIndex === 1 && <IoClose size={18} />} </div>
                   <div className={languageIndex === 2 ? styles['active-language'] : styles['language']} onClick={() => changeLanguage(2)}>MySQL {languageIndex === 2 && <IoClose size={18} />} </div>
                   <div className={languageIndex === 3 ? styles['active-language'] : styles['language']} onClick={() => changeLanguage(3)}>C# {languageIndex === 3 && <IoClose size={18} />} </div>
                   <div className={languageIndex === 4 ? styles['active-language'] : styles['language']} onClick={() => changeLanguage(4)}>Matlab {languageIndex === 4 && <IoClose size={18} />} </div>
                 </div>
-                <div className={styles['group']}>
+                <div className={styles["group"]}>
                   <p>Language version</p>
                   <input style={{ width: '100%' }} type="number" placeholder='Enter language version' value={version} onChange={(e) => setVersion(e.target.value)} />
                 </div>
 
-                <div className={styles['group']}>
+                <div className={styles["group"]}>
                   <p>When will this session start?</p>
                   <input type="date" placeholder='Select date' style={{ marginRight: '20px' }} value={sessionStartDate} onChange={(e) => setSessionStartDate(e.target.value)} />
                   <input type="time" name="" id="" placeholder='select time' value={sessionStartTime} onChange={(e) => setSessionStartTime(e.target.value)} />
                 </div>
-                <div className={styles['group']}>
+                <div className={styles["group"]}>
                   <p>When will this session end?</p>
                   <input type="date" placeholder='Select date' value={sessionEndDate} onChange={(e) => setSessionEndDate(e.target.value)} style={{ marginRight: '20px' }} />
                   <input type="time" name="" id="" value={sessionEndTime} onChange={(e) => setSessionEndTime(e.target.value)} placeholder='select time' />
                 </div>
-                <div className={styles['group']}>
+                <div className={styles["group"]}>
                   <p>Session name or tag</p>
                   <input style={{ width: '100%' }} type="text" value={sessionName} onChange={(e) => setSessionName(e.target.value)} placeholder='Enter a name or tag for this session (e.g. Web Development Practical)' />
                 </div>
-              </div>}
+              </div>
+            )}
 
             {/* --- STEP 2 --- */}
             {formstep === 2 &&
@@ -340,78 +390,136 @@ const Modal = () => {
                     </div>
                   </div>
                 ))}
-                <div className={styles['allow']}>
+                <div className={styles["allow"]}>
                   <p>Allow students to get review report after grading</p>
-                  <div className={styles['toggle-container']} style={{ backgroundColor: allowReviewReport ? '' : '#969696', cursor: 'pointer' }} onClick={() => setAllowReviewReport(value => !value)}>
-                    <div className={styles['toggle-circle']} style={{ marginLeft: allowReviewReport ? 'auto' : '0' }}></div>
+                  <div
+                    className={styles["toggle-container"]}
+                    style={{
+                      backgroundColor: allowReviewReport ? "" : "#969696",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setAllowReviewReport((value) => !value)}
+                  >
+                    <div
+                      className={styles["toggle-circle"]}
+                      style={{ marginLeft: allowReviewReport ? "auto" : "0" }}
+                    ></div>
                   </div>
                 </div>
                 <div className={styles['add']} onClick={addQuestion}>
+
                   <IoAddOutline size={22} />
                   <p> Add another question</p>
                 </div>
-              </div>}
+              </div>
+            )}
 
-            {formstep === 3 &&
-              <div className={styles['content1']}>
-                <div className={styles['group']} style={{ marginBottom: '15px' }}>
+            {formstep === 3 && (
+              <div className={styles["content1"]}>
+                <div
+                  className={styles["group"]}
+                  style={{ marginBottom: "15px" }}
+                >
                   <p>Enrollment method</p>
-                  <select name="" id="" value={enrollmentMethod} style={{ width: '100%' }} onChange={(e) => { setEnrollmentMethod(e.target.value); setStudents([]) }}>
+                  <select
+                    name=""
+                    id=""
+                    value={enrollmentMethod}
+                    style={{ width: "100%" }}
+                    onChange={(e) => {
+                      setEnrollmentMethod(e.target.value);
+                      setStudents([]);
+                    }}
+                  >
                     <option value="file">Add student from file</option>
-                    <option value="direct" >Direct invitation</option>
+                    <option value="direct">Direct invitation</option>
                   </select>
                 </div>
 
                 {/* <div className={styles['link']}>
-                  <p>sessionmgtsite.com/session/s3201</p>
-                  <span onClick={handleCopy}>{copied ? "Copied!" : "Copy"} <PiCopySimpleFill /></span>
-                </div> */}
-                {enrollmentMethod === 'file' && <label htmlFor='file'>
-                  <div className={styles['upload-container']}>
-                    <BsCloudUpload className={styles['upload-icon']} />
-                    <p className={styles['text1']}>Click to upload</p>
-                    <p className={styles['text2']}>CSV or XLS file up to 10mb. Ensure columns are labelled 'Full Name' and 'Matric Number'</p>
-                    <input type="file" name="" id="file" accept=".csv,.xls,.xlsx" onChange={handleFileUpload} style={{ display: 'none' }} />
-                  </div>
-                </label>}
+      <p>sessionmgtsite.com/session/s3201</p>
+      <span onClick={handleCopy}>{copied ? "Copied!" : "Copy"} <PiCopySimpleFill /></span>
+    </div> */}
+                {enrollmentMethod === "file" && (
+                  <label htmlFor="file">
+                    <div className={styles["upload-container"]}>
+                      <BsCloudUpload className={styles["upload-icon"]} />
+                      <p className={styles["text1"]}>Click to upload</p>
+                      <p className={styles["text2"]}>
+                        CSV or XLS file up to 10mb. Ensure columns are labelled
+                        'Full Name' and 'Matric Number'
+                      </p>
+                      <input
+                        type="file"
+                        name=""
+                        id="file"
+                        accept=".csv,.xls,.xlsx"
+                        onChange={handleFileUpload}
+                        style={{ display: "none" }}
+                      />
+                    </div>
+                  </label>
+                )}
                 {console.log(students)}
 
-                {enrollmentMethod === 'direct' &&
-                  <div className={styles['group']}>
+                {enrollmentMethod === "direct" && (
+                  <div className={styles["group"]}>
                     <p>Student Information to invite</p>
-                    <input type="text" placeholder='Enter student full name' style={{ marginRight: '20px' }} value={studentName} onChange={(e) => setStudentName(e.target.value)} />
-                    <input type="text" placeholder='Enter student matric number' value={studentMatricNo} onChange={(e) => setStudentMatricNo(e.target.value)} />
-                    <button className={styles['add-student']} onClick={addStudent}>Add</button>
+                    <input
+                      type="text"
+                      placeholder="Enter student full name"
+                      style={{ marginRight: "20px" }}
+                      value={studentName}
+                      onChange={(e) => setStudentName(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      placeholder="Enter student matric number"
+                      value={studentMatricNo}
+                      onChange={(e) => setStudentMatricNo(e.target.value)}
+                    />
+                    <button
+                      className={styles["add-student"]}
+                      onClick={addStudent}
+                    >
+                      Add
+                    </button>
                   </div>
-                }
+                )}
 
-                <div className={styles['student-container']}>
-                  <h4 className={styles['student-head-text']}>Students</h4>
+                <div className={styles["student-container"]}>
+                  <h4 className={styles["student-head-text"]}>Students</h4>
                   {students?.map((student, index) => (
                     <div key={index} className={styles['student-box']}>
                       <p>{student.fullname}</p>
                       <p>{student.matric_number}</p>
                     </div>
-
                   ))}
                 </div>
-                <div className={styles['group']}>
+                <div className={styles["group"]}>
                   <p>When will invitation expire? (Optional)</p>
                   <input type="number" placeholder='Enter number' style={{ marginRight: '20px' }} value={invitationExpiryDuration} onChange={(e) => setInvitationExpiryDuration(e.target.value)} />
                   <select name="" id="">
                     <option value="">Hours</option>
                   </select>
                 </div>
+              </div>
+            )}
 
-              </div>}
-
-            {formstep === 4 &&
-              <div className={styles['content1']}>
-                <div className={styles['group']} style={{ marginBottom: '15px' }}>
+            {formstep === 4 && (
+              <div className={styles["content1"]}>
+                <div
+                  className={styles["group"]}
+                  style={{ marginBottom: "15px" }}
+                >
                   <p>All set?</p>
-                  <span>Clicking the Submit button below confirms that all has been set for this session.</span>
+                  <span>
+                    Clicking the Submit button below confirms that all has been
+                    set for this session.
+                  </span>
                 </div>
-              </div>}
+              </div>
+            )}
           </div>
         </div>
 
@@ -425,7 +533,7 @@ const Modal = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

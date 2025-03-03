@@ -1,0 +1,503 @@
+/* Main container */
+.container {
+  display: flex;
+  height: 100vh;
+  background-color: white;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 64px;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0;
+  gap: 24px;
+}
+
+.sidebarButton {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.sidebarButton:hover {
+  background-color: #f3f4f6;
+}
+
+.sidebarButtonActive {
+  background-color: #f3f4f6;
+}
+
+.sidebarIcon {
+  width: 20px;
+  height: 20px;
+  color: #6b7280;
+}
+
+.sidebarIconActive {
+  width: 20px;
+  height: 20px;
+  color: #4f46e5;
+}
+
+.sidebarFooter {
+  margin-top: auto;
+}
+
+.addButton {
+  padding: 8px;
+  border-radius: 50%;
+  border: none;
+  background-color: #4f46e5;
+  color: white;
+  cursor: pointer;
+}
+
+.addButtonIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Main content */
+.content {
+  flex: 1;
+  overflow: auto;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  padding: 16px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.breadcrumbInner {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.breadcrumbItem {
+  color: #6b7280;
+}
+
+.breadcrumbSeparator {
+  margin: 0 8px;
+  color: #d1d5db;
+}
+
+.breadcrumbItemActive {
+  color: #374151;
+}
+
+/* Header */
+.header {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.createButton {
+  padding: 8px 16px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.createButton:hover {
+  background-color: #2563eb;
+}
+
+.pruneButton {
+  padding: 8px 16px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pruneButton:hover {
+  background-color: #dc2626;
+}
+
+/* Tabs */
+.tabsContainer {
+  padding: 0 24px;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 16px;
+}
+
+.tab {
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.tabActive {
+  border-bottom: 2px solid #1f2937;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.tabContent {
+  margin-top: 0;
+}
+
+/* Search */
+.searchContainer {
+  margin-bottom: 16px;
+}
+
+.searchLabel {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.searchInputContainer {
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 16px 8px 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
+}
+
+/* Table */
+.tableContainer {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tableHeader {
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tableHeaderCell {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.tableRow {
+  border-bottom: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+
+.tableRow:hover {
+  background-color: #f9fafb;
+}
+
+.tableRowSelected {
+  background-color: #f9fafb;
+}
+
+.tableCell {
+  padding: 12px 16px;
+}
+
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nameIcon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actionButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.actionButton:hover {
+  color: #374151;
+}
+
+.actionIcon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Details */
+.detailsContainer {
+  padding: 24px;
+}
+
+.detailsTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.detailsCard {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.detailsCardHeader {
+  padding: 16px;
+  padding-bottom: 8px;
+}
+
+.detailsCardHeaderContent {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailsCardIcon {
+  width: 20px;
+  height: 20px;
+  background-color: #e0e7ff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailsCardIconInner {
+  width: 16px;
+  height: 16px;
+  color: #4f46e5;
+}
+
+.detailsCardTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.detailsCardSubtitle {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.detailsCardContent {
+  padding: 0 16px 16px;
+}
+
+.detailsCardButtons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.updateButton {
+  padding: 6px 12px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.updateButton:hover {
+  background-color: #4338ca;
+}
+
+.deleteButton {
+  padding: 6px 12px;
+  background-color: transparent;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #f3f4f6;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.detailsItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.detailsItemIcon {
+  padding: 6px;
+  background-color: #e0e7ff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailsItemIconInner {
+  width: 16px;
+  height: 16px;
+  color: #4f46e5;
+}
+
+.detailsItemTitle {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.detailsItemValue {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.section {
+  margin-top: 24px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.codeBlock {
+  background-color: #f3f4f6;
+  padding: 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.code {
+  font-size: 14px;
+  font-family: monospace;
+}
+
+.codeIcon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+.descriptionBox {
+  background-color: #f9fafb;
+  border: 1px solid #f3f4f6;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.descriptionText {
+  font-size: 14px;
+  color: #374151;
+}
+
+.logsBox {
+  background-color: #f9fafb;
+  border: 1px solid #f3f4f6;
+  padding: 16px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 12px;
+  color: #374151;
+}
+
+.logLine {
+  margin-bottom: 4px;
+}
+
+.actionButtons {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.pruneImageButton {
+  padding: 8px 16px;
+  background-color: #f97316;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.pruneImageButton:hover {
+  background-color: #ea580c;
+}
+
+.retryBuildButton {
+  padding: 8px 16px;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.retryBuildButton:hover {
+  background-color: #16a34a;
+}
