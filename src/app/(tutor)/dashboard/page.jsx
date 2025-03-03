@@ -4,10 +4,11 @@ import styles from "./page.module.css";
 import Navbar from "@/components/session-card/navbar/navbar";
 import StatCard from "@/components/statistic-card/statCard";
 import SessionCard from "@/components/session-card/sessionCard";
-import Loader from "@/components/loader/loader";
+// import Loader from "@/components/loader/loader";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveMenu } from "@/redux/sidebarSlice";
 import { fetchProfile } from "@/services/login";
+import Loader from "@/components/Loader/loader";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
