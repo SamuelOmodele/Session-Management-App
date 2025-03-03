@@ -11,6 +11,7 @@ import * as XLSX from "xlsx";
 import { toast, ToastContainer } from "react-toastify";
 import { createSession } from '@/services/createSession';
 import Loader from '../loader/loader';
+import Spinner from '../spinner/spinner';
 
 
 const CreateSessionModal = () => {
@@ -421,7 +422,7 @@ const CreateSessionModal = () => {
                     <button className={styles['discard-btn']}>Discard changes</button>
                     {formstep < 4 && <button onClick={validateForm}>Continue</button>}
                     {/* {formstep < 4 && <button onClick={() => setFormStep(formstep => formstep + 1)}>Continue</button>} */}
-                    {formstep === 4 && <button onClick={displayFormData}>{loading ? <Loader size={22} color={'white'} /> : 'Submit'}</button>}
+                    {formstep === 4 && <button onClick={displayFormData}>{loading ? <Spinner size={22} color={'white'} /> : 'Submit'}</button>}
                 </div>
             </div>
         </div>

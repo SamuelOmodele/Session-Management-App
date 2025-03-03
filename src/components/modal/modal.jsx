@@ -412,7 +412,7 @@ const Modal = () => {
                   <p> Add another question</p>
                 </div>
               </div>
-            )}
+            }
 
             {formstep === 3 && (
               <div className={styles["content1"]}>
